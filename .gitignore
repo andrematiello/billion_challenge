@@ -1,11 +1,14 @@
 docs/logs/*
 !docs/logs/.gitkeep
 
-data/output/
+data/*
 !data/output/.gitkeep
 
 .vscode/
 site_packages.py
+
+logs/log_python.csv
+# Byte-compiled / optimized / DLL files
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/python
