@@ -6,11 +6,14 @@ import time
 import datetime
 
 # Constants
-PATH_CSV = Path("data/weather_stations.csv")
-LOG_PATH = Path("logs/log_python.csv")
+BASE_DIR = Path(__file__).resolve().parent.parent  # volta para a raiz do projeto
+PATH_CSV = BASE_DIR / "data" / "weather_stations.csv"
+LOG_PATH = BASE_DIR / "logs" / "log_python.csv"
+OUTPUT_PATH = BASE_DIR / "data" / "measurements_python.csv"  # ← alterado aqui
 
-# Ensure the logs directory exists
+# Ensure required directories exist
 LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 
 def log_step(step: str, status: str) -> None:
@@ -88,6 +91,23 @@ def format_results(stats: Dict[str, Dict[str, float]]) -> Dict[str, Dict[str, st
     return formatted
 
 
+def save_results_to_file(results: Dict[str, Dict[str, str]], output_path: Path) -> None:
+    """
+    Saves the formatted results to a CSV file with semicolon delimiter.
+    """
+    try:
+        with output_path.open("w", encoding="utf-8") as f:
+            f.write("station;min;mean;max\n")
+            for station, data in results.items():
+                line = f"{station};{data['min']};{data['mean']};{data['max']}\n"
+                f.write(line)
+        log_step("Save results", "Success")
+        print(f"✅ Results saved to {output_path}")
+    except Exception as e:
+        log_step("Save results", f"Failed: {e}")
+        print(f"❌ Failed to save results: {e}")
+
+
 def process_temperatures(path_to_csv: Path) -> Dict[str, Dict[str, str]]:
     """
     Full processing pipeline: reads, computes, formats temperature statistics.
@@ -98,6 +118,7 @@ def process_temperatures(path_to_csv: Path) -> Dict[str, Dict[str, str]]:
     temperature_data = read_temperatures(path_to_csv)
     stats = calculate_statistics(temperature_data)
     formatted = format_results(stats)
+    save_results_to_file(formatted, OUTPUT_PATH)
 
     elapsed = time.time() - start_time
     print(f"⏱️  Total processing completed in {elapsed:.2f} seconds.")
