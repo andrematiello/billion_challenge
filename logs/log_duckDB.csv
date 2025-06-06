@@ -12,3 +12,10 @@ LINE 9:                 GROUP BY station
 2025-06-06T20:08:21.126077,Contagem de estações,✅ Success: 8883 stations processed
 2025-06-06T20:08:21.129128,Exportação para CSV,✅ Success
 2025-06-06T20:08:21.129193,Processamento finalizado,✅ Completed in 1.28 seconds
+2025-06-06T20:45:18.207706,Conexão DuckDB,✅ Success
+2025-06-06T20:45:19.474620,Agregação executada,✅ Success
+2025-06-06T20:45:19.475038,Contagem de estações,✅ Success: 8883 stations processed
+2025-06-06T20:45:19.478043,Exportação para CSV,✅ Success
+2025-06-06T20:45:19.478084,-----,-----
+2025-06-06T20:45:19.490249,Exportação para Parquet,✅ Success
+2025-06-06T20:45:19.490303,Processamento finalizado,✅ Completed in 1.29 seconds

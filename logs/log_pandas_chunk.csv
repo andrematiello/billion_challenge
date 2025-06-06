@@ -10,3 +10,7 @@
 2025-06-06T19:19:07.050061,Total processing,✅ Completed in 35.69 seconds
 2025-06-06T19:43:29.619071,Chunked processing,✅ Success: 8883 stations processed
 2025-06-06T19:43:29.619109,Total processing,✅ Completed in 36.96 seconds
+2025-06-06T20:43:41.317538,Save CSV,✅ Success
+2025-06-06T20:43:41.317574,-----,-----
+2025-06-06T20:43:41.329011,Save Parquet,✅ Success
+2025-06-06T20:43:41.329051,Total processing,✅ Completed in 37.14 seconds
