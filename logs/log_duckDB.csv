@@ -1,0 +1,14 @@
+2025-06-06T19:58:47.919637,Conectar ao DuckDB,✅ Success
+2025-06-06T19:58:47.949562,ETL DuckDB,"Failed: Binder Error: Referenced column ""station"" not found in FROM clause!
+Candidate bindings: ""Hacienda Heights""
+
+LINE 9:                 GROUP BY station
+                                 ^"
+2025-06-06T20:01:38.276973,Conexão DuckDB,✅ Success
+2025-06-06T20:01:39.560322,Agregação e exportação,✅ Success
+2025-06-06T20:01:39.560400,Processamento finalizado,✅ Completed in 1.29 seconds
+2025-06-06T20:08:19.856223,Conexão DuckDB,✅ Success
+2025-06-06T20:08:21.125125,Agregação executada,✅ Success
+2025-06-06T20:08:21.126077,Contagem de estações,✅ Success: 8883 stations processed
+2025-06-06T20:08:21.129128,Exportação para CSV,✅ Success
+2025-06-06T20:08:21.129193,Processamento finalizado,✅ Completed in 1.28 seconds
