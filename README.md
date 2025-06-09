@@ -51,7 +51,9 @@ Desenvolver soluções em Python para:
 - Temperatura média (com 2 casas decimais)
 
 🔹Ordenar os resultados por nome da estação
+
 🔹Exportar os resultados para os formatos .csv e .parquet
+
 🔹Comparar diferentes abordagens de performance, memória e escalabilidade
 
 ---
@@ -105,7 +107,9 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 
 ### Project support
 🔹 Poetry para gerenciamento de dependências
+
 🔹 Pyenv para isolamento de ambientes
+
 🔹 pre-commit hooks:
 - trailing-whitespace
 - end-of-file-fixer
@@ -114,16 +118,22 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 - check-json
 - check-merge-conflict
 - check-case-conflict
+
 🔹 pip-audit
+
 🔹 black
+
 🔹 ruff
 
 
 ### Project development
 
 🔹Python 3.11+
+
 🔹Pandas
+
 🔹DuckDB
+
 🔹Polars
 
 ---
