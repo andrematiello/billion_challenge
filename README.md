@@ -20,9 +20,9 @@ Posteriormente, a iniciativa foi adaptada para Python por Luciano Vasconcelos, n
 
 ---
 
-## 🗂️ Estrutura dos Dados
+## Estrutura dos Dados
 
-O arquivo de entrada contém **medições de temperatura** de diferentes estações meteorológicas, com o seguinte formato por linha:
+O arquivo de entrada contém medições de temperatura de diferentes estações meteorológicas, com o seguinte formato por linha:
 
 ```text
 <nome_da_estação>;<temperatura>
@@ -39,7 +39,7 @@ Cape Town;19.01
 
 ---
 
-## 🔍 Desafio Proposto
+## Desafio Proposto
 
 Desenvolver soluções em Python para:
 
@@ -56,7 +56,7 @@ Desenvolver soluções em Python para:
 
 ---
 
-## 🧪 Abordagens Implementadas
+## Abordagens Implementadas
 🔹 Leitura Linha a Linha (Streaming Puro - Python Nativo)
 - Uso de leitura sequencial com open() + readline()
 - Agregações realizadas em tempo real com dicionários
@@ -86,7 +86,7 @@ Desenvolver soluções em Python para:
 
 ---
 
-## 📊 Exemplos de Saída
+## Exemplos de Saída
 Todos os resultados finais são exportados nos formatos .csv e .parquet
 
 Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apache Superset ou puro Python.Formato de saída (ordenado alfabeticamente por nome da estação):
@@ -101,7 +101,7 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 
 ---
 
-## 🧱 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Project support
 🔹 Poetry para gerenciamento de dependências
