@@ -1,12 +1,8 @@
-# 🌡️ ONE BILLION CHALLENGE (OBRC) – Python Edition
+# ONE BILLION CHALLENGE (OBRC) – Python Edition
 
 ## ABOUT THE PROJECT
 
 Uma jornada prática e realista de engenharia de dados para processar 1 bilhão de registros, extraindo estatísticas agregadas de temperatura com performance, escalabilidade e elegância em Python.
-
----
-
-## 🧠 Objetivo do Projeto
 
 O projeto One Billion Row Challenge (OBRC) foi desenvolvido como um exercício avançado de engenharia de dados aplicada, com o objetivo de demonstrar como processar com eficiência um **arquivo massivo de 1 bilhão de linhas (~14GB) usando Python. O foco está em realizar operações computacionalmente intensas como agregações (mínimo, média e máximo) e ordenação com uso criterioso de recursos computacionais.
 
@@ -14,7 +10,7 @@ Este projeto é particularmente útil como estudo de caso para engenheiros de da
 
 ---
 
-## 🧬 Inspiração
+## Inspiração
 
 O desafio foi inspirado no projeto original [1BRC](https://github.com/gunnarmorling/1brc), proposto por Gunnar Morling em Java, com o seguinte espírito:
 
@@ -109,9 +105,7 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 
 ### Project support
 🔹 Poetry para gerenciamento de dependências
-
 🔹 Pyenv para isolamento de ambientes
-
 🔹 pre-commit hooks:
 - trailing-whitespace
 - end-of-file-fixer
@@ -120,23 +114,17 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 - check-json
 - check-merge-conflict
 - check-case-conflict
-
 🔹 pip-audit
-
 🔹 black
-
 🔹 ruff
 
 
 ### Project development
 
 🔹Python 3.11+
-
 🔹Pandas
-
 🔹DuckDB
-
-🔹Polars (explorado em experimentos complementares)
+🔹Polars
 
 ---
 
