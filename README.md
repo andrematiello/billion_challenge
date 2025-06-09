@@ -1,10 +1,21 @@
-# ONE BILLION CHALLENGE (OBRC) – PYTHON EDITION
+# ONE BILLION CHALLENGE – PYTHON EDITION
 
 ## ABOUT THE PROJECT
 
-Uma jornada prática e realista de engenharia de dados para processar 1 bilhão de registros, extraindo estatísticas agregadas de temperatura com performance, escalabilidade em Python. O projeto One Billion Row Challenge (OBRC) foi desenvolvido como um exercício avançado de engenharia de dados aplicada, com o objetivo de demonstrar como processar com eficiência um arquivo massivo de 1 bilhão de linhas (~14GB) usando Python, cujo foco está em realizar operações computacionalmente intensas como agregações (mínimo, média e máximo) e ordenação com uso criterioso de recursos computacionais.
+Uma jornada prática e realista de engenharia de dados para processar 1 bilhão de registros, extraindo estatísticas agregadas de temperatura com performance, escalabilidade em Python, utilizando o projeto **One Billion Row Challenge**, desenvolvido como um exercício avançado de engenharia de dados aplicada, com o objetivo de demonstrar como processar com eficiência um arquivo massivo de 1 bilhão de linhas (~14GB) usando Python, cujo foco está em realizar operações computacionalmente intensas como agregações (mínimo, média e máximo) e ordenação com uso criterioso de recursos computacionais, de forma escalável.
 
 Este projeto é particularmente útil como estudo de caso para engenheiros de dados, cientistas de dados e desenvolvedores que desejam aprofundar seus conhecimentos em processamento de arquivos massivos, estratégias de chunking, desempenho de bibliotecas Python e uso de engines analíticas modernas como o DuckDB e embora o One Billion Row Challenge não seja um projeto técnico, ele simula situações reais de negócio enfrentadas por empresas que lidam com grandes volumes de dados transacionais, sensoriais ou operacionais.
+
+## INSPIRATION
+
+O desafio foi inspirado no projeto original [1BRC](https://github.com/gunnarmorling/1brc), proposto por Gunnar Morling em Java, com o espírito:
+
+> “Explore até onde as linguagens modernas podem ir ao processar um bilhão de linhas, use todos os (v)núcleos, SIMD, otimizações de GC... e crie a implementação mais rápida para resolver esse problema!”
+
+Posteriormente, a iniciativa foi adaptada para Python por Luciano Vasconcelos, no repositório [One-Billion-Row-Challenge-Python](https://github.com/lvgalvao/One-Billion-Row-Challenge-Python), como um workshop, dentro do contexto educacional da Jornada de Dados, em 2024.
+
+
+---
 
 ## BUSINESS PROBLEM
 
@@ -21,35 +32,6 @@ A seguir, destacam-se os principais problemas que esse case ajuda a resolver:
 ➡️ 5. Treinamento e Capacitação Técnica de Times de Dados, para formar times com maturidade em engenharia de dados exige cases práticos e desafiadores, que vão além de notebooks pequenos ou datasets de toy, demonstrando ser um estudo de caso avançado que pode ser usado para treinar engenheiros, analistas e cientistas de dados, com foco em performance, arquitetura de dados e boas práticas de codificação.
 
 ➡️ 6. Exportação de Dados para Consumo em BI e Visualizações, etapa comum a necessidade de transformar arquivos brutos em formatos eficientes para dashboards (como .csv limpo ou .parquet otimizado), gerando outputs padronizados e ordenados para ingestão por ferramentas como Power BI, Metabase, Superset ou soluções em nuvem, com foco em consumo rápido e leve.
-
----
-
-## INSPIRATION
-
-O desafio foi inspirado no projeto original [1BRC](https://github.com/gunnarmorling/1brc), proposto por Gunnar Morling em Java, com o espírito:
-
-> “Explore até onde as linguagens modernas podem ir ao processar um bilhão de linhas, use todos os (v)núcleos, SIMD, otimizações de GC... e crie a implementação mais rápida para resolver esse problema!”
-
-Posteriormente, a iniciativa foi adaptada para Python por Luciano Vasconcelos, no repositório [One-Billion-Row-Challenge-Python](https://github.com/lvgalvao/One-Billion-Row-Challenge-Python), como um workshop, dentro do contexto educacional da Jornada de Dados, em 2024.
-
----
-
-## DATA STRUCTURE
-
-O arquivo de entrada contém medições de temperatura de diferentes estações meteorológicas, com o seguinte formato por linha:
-
-```text
-<nome_da_estação>;<temperatura>
-```
-
-nome_da_estação: string
-temperatura: float com precisão de duas casas decimais
-Exemplo:
-```text
-Stockholm;-5.32
-São Paulo;25.85
-Cape Town;19.01
-```
 
 ---
 
@@ -70,9 +52,54 @@ Desenvolver soluções em Python para:
 
 🔹Comparar diferentes abordagens de performance, memória e escalabilidade
 
----
+### DATA STRUCTURE
 
-## IMPLEMENTED APPROACHES
+O arquivo de entrada contém medições de temperatura de diferentes estações meteorológicas, com o seguinte formato por linha:
+
+### GENERAL OPERATION
+
+1. Validação dos Argumentos, pois o script recebe como argumento a quantidade de linhas a serem geradas.
+
+2. Coleta de Nomes de Estações, lê um arquivo chamado `model.csv` com nomes de estações meteorológicas.
+
+3. Remove duplicatas e ignora linhas comentadas com `#`, ainda devolve uma estimativa de tamanho do arquivo
+
+4. Calcula o tamanho estimado do arquivo final com base na média de caracteres dos nomes das estações e nas temperaturas geradas, com a geração de dados sintéticos
+
+5. Cria medições com temperaturas aleatórias entre -99.9°C e 99.9°C e gera o arquivo `data/weather_stations.csv`.
+
+6. Utiliza processamento em batches de 10.000 registros para melhor desempenho de escrita e apresenta uma barra de progresso ao longo da execução.
+
+7. Medições de Performance sendo que ao final, mostra o tempo total de execução e o tamanho real do arquivo gerado.
+
+### OUTPUT FILE
+
+Arquivo gerado `data/weather_stations.csv` em 6 min e 5 seg, com 14.8 GiB, somando 1 bilhão de linhas.
+
+```text
+<nome_da_estação>;<temperatura>
+```
+- nome_da_estação: string
+- temperatura: float com precisão de duas casas decimais
+
+Exemplo:
+
+```text
+Stockholm;-5.32
+São Paulo;25.85
+Cape Town;19.01
+```
+
+### INTERESTING TECHNICAL POINTS
+
+- Evita uso de `round()` para performance, usando `f"{x:.1f}"` para limitar casas decimais
+- Usa `random.choices()` para gerar estações com distribuição uniforme entre nomes válidos
+- Escreve dados em lote para evitar overhead de I/O, linha a linha
+- Estima o uso de disco antes da geração, com função personalizada para conversão de bytes
+- Fornece mensagens amigáveis de erro e ajuda ao usuário
+
+
+### IMPLEMENTED APPROACHES
 
 🔹 Leitura Linha a Linha (Streaming Puro - Python Nativo)
 - Uso de leitura sequencial com open() + readline()
@@ -102,6 +129,64 @@ Desenvolver soluções em Python para:
 - Suporte nativo a .parquet, integração direta com Pandas, Apache Arrow e Python
 
 ---
+
+## HOW TO RUN
+
+### REQUIREMENTS
+
+1. Git e Github: Utilizado para versionamento do código e para repositório remoto do projeto.
+Você deve ter o Git instalado em sua máquina e também deve ter uma conta no GitHub.
+[Instruções de instalação do Git aqui](https://git-scm.com/doc).
+[Instruções de instalação do Github aqui](https://docs.github.com/pt).
+
+2. Pyenv: É usado para gerenciar versões do Python em ambientes virtuais, fundamental para isolar a aplicação e evitar problemas de conflitos entre versões de bibliotecas e do próprio Python.
+[Instruções de instalação do Pyenv aqui](https://github.com/pyenv/pyenv#installation).
+Neste projeto, vamos utilizar o Python 3.11.4
+
+3. Poetry: Este projeto utiliza Poetry para gerenciamento de dependências.
+[Instruções de instalação do Poetry aqui](https://python-poetry.org/docs/#installation).
+
+### INSTALAÇÃO E CONFIGURAÇÃO
+
+A - Execute o comando, passando os argumentos da quantidade de linhas que quer gerar:
+
+```python
+python create_measurements.py 1_000_000_000
+```
+---
+
+B - Entre no diretório `/data/`e execute o comando, de acordo com a ferramenta e amodelagem de dados desejada:
+
+i) Python
+```python
+python etl_python.py
+```
+
+ii) Python com chuncking
+```python
+python etl_python_chuncking.py
+```
+
+iii) Pandas
+```python
+python etl_pandas.py
+```
+
+iv) Pandas com chuncking
+```python
+python etl_pandas_chuncking.py
+```
+---
+
+C - Instale a biblioteca duckDB, utilizando o Poetry, com o comando:
+```python
+poetry add duckdb
+```
+
+v) duckDB
+```python
+python etl_duckDB.py
+```
 
 ## OUTPUT EXAMPLES
 
@@ -169,9 +254,13 @@ DuckDB SQL	Baixo	Muito baixo	Ideal para pipelines analíticos colunarizados
 ## MAIN TECHNICAL FEATURES
 
 ✅ Modular function design (read, calculate, format, log)
+
 ✅ Log file with timestamps and emojis for readability
+
 ✅ Automatic folder creation for logs
+
 ✅ Fast performance with native Python (no Pandas or NumPy required)
+
 ✅ Friendly CLI usage, expandable to larger systems
 
 ---
