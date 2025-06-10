@@ -1,4 +1,4 @@
-# ONE BILLION CHALLENGE – PYTHON EDITION
+# ONE BILLION ROWS CHALLENGE - PYTHON EDITION
 
 ## ABOUT THE PROJECT
 
@@ -16,17 +16,23 @@ O desafio foi inspirado no projeto original [1BRC](https://github.com/gunnarmorl
 
 A seguir, destacam-se os principais problemas que esse case ajuda a resolver:
 
-➡️ 1. Processamento de Grandes Volumes de Dados em Arquivos Brutos, quando empresas frequentemente recebem dados em formatos como .csv, .json ou .parquet contendo milhões ou bilhões de linhas, especialmente em setores como varejo, energia, climatologia, IoT e telecom, demonstrando como ler, limpar e agregar dados diretamente de arquivos massivos, sem a necessidade imediata de carregar tudo na memória ou depender de clusters caros.
+➡️ 1. Processamento de Grandes Volumes de Dados em Arquivos Brutos
+Quando empresas frequentemente recebem dados em formatos como .csv, .json ou .parquet contendo milhões ou bilhões de linhas, especialmente em setores como varejo, energia, climatologia, IoT e telecom, demonstrando como ler, limpar e agregar dados diretamente de arquivos massivos, sem a necessidade imediata de carregar tudo na memória ou depender de clusters caros.
 
-➡️ 2. Cálculo Eficiente de Estatísticas Agregadas, por meio da análise de dados operacionais exige cálculos como média, máximo e mínimo, que parecem simples, mas se tornam desafiadores com grande volume e múltiplas chaves, o case mostra como aplicar estratégias otimizadas de agregação, inclusive via DuckDB ou Pandas com chunking, simulando o cálculo de indicadores operacionais em escala.
+➡️ 2. Cálculo Eficiente de Estatísticas Agregadas
+Por meio da análise de dados operacionais exige cálculos como média, máximo e mínimo, que parecem simples, mas se tornam desafiadores com grande volume e múltiplas chaves, o case mostra como aplicar estratégias otimizadas de agregação, inclusive via DuckDB ou Pandas com chunking, simulando o cálculo de indicadores operacionais em escala.
 
-➡️ 3. Desempenho e Otimização de Recursos Computacionais, quando projetos de dados nem sempre rodam em ambientes robustos, muitos times enfrentam limitações de RAM, CPU e I/O, especialmente em pipelines locais, servidores intermediários ou jobs agendados, explorando estratégias de baixo consumo de memória, chunking e uso de engines colunares (como DuckDB) que permitem otimizar desempenho mesmo em máquinas comuns.
+➡️ 3. Desempenho e Otimização de Recursos Computacionais
+Quando projetos de dados nem sempre rodam em ambientes robustos, muitos times enfrentam limitações de RAM, CPU e I/O, especialmente em pipelines locais, servidores intermediários ou jobs agendados, explorando estratégias de baixo consumo de memória, chunking e uso de engines colunares (como DuckDB) que permitem otimizar desempenho mesmo em máquinas comuns.
 
-➡️ 4. Validação de Arquiteturas Analíticas para Batch Processing, no processo de validação, por exemplo, se uma arquitetura (ex: processamento local + exportação .parquet) atende aos SLAs de tempo e custo antes de mover dados para a nuvem, fornecendo um sandbox completo e replicável, permitindo testar pipelines de processamento, benchmarkar formatos de arquivo e comparar abordagens de leitura e agregação.
+➡️ 4. Validação de Arquiteturas Analíticas para Batch Processing
+No processo de validação, por exemplo, se uma arquitetura (ex: processamento local + exportação .parquet) atende aos SLAs de tempo e custo antes de mover dados para a nuvem, fornecendo um sandbox completo e replicável, permitindo testar pipelines de processamento, benchmarkar formatos de arquivo e comparar abordagens de leitura e agregação.
 
-➡️ 5. Treinamento e Capacitação Técnica de Times de Dados, para formar times com maturidade em engenharia de dados exige cases práticos e desafiadores, que vão além de notebooks pequenos ou datasets de toy, demonstrando ser um estudo de caso avançado que pode ser usado para treinar engenheiros, analistas e cientistas de dados, com foco em performance, arquitetura de dados e boas práticas de codificação.
+➡️ 5. Treinamento e Capacitação Técnica de Times de Dados
+Para formar times com maturidade em engenharia de dados exige cases práticos e desafiadores, que vão além de notebooks pequenos ou datasets de toy, demonstrando ser um estudo de caso avançado que pode ser usado para treinar engenheiros, analistas e cientistas de dados, com foco em performance, arquitetura de dados e boas práticas de codificação.
 
-➡️ 6. Exportação de Dados para Consumo em BI e Visualizações, etapa comum a necessidade de transformar arquivos brutos em formatos eficientes para dashboards (como .csv limpo ou .parquet otimizado), gerando outputs padronizados e ordenados para ingestão por ferramentas como Power BI, Metabase, Superset ou soluções em nuvem, com foco em consumo rápido e leve.
+➡️ 6. Exportação de Dados para Consumo em BI e Visualizações
+Etapa comum a necessidade de transformar arquivos brutos em formatos eficientes para dashboards (como .csv limpo ou .parquet otimizado), gerando outputs padronizados e ordenados para ingestão por ferramentas como Power BI, Metabase, Superset ou soluções em nuvem, com foco em consumo rápido e leve.
 
 ---
 
@@ -35,19 +41,13 @@ A seguir, destacam-se os principais problemas que esse case ajuda a resolver:
 Desenvolver soluções em Python para:
 
 🔹Ler o arquivo de entrada com 1 bilhão de linhas
-
 🔹Calcular, para cada estação:
 - Temperatura mínima
 - Temperatura máxima
 - Temperatura média (com 2 casas decimais)
-
 🔹Ordenar os resultados por nome da estação
-
 🔹Exportar os resultados para os formatos .csv e .parquet
-
 🔹Comparar diferentes abordagens de performance, memória e escalabilidade
-
-### DATA STRUCTURE
 
 O arquivo de entrada contém medições de temperatura de diferentes estações meteorológicas, com o seguinte formato por linha:
 
@@ -109,7 +109,7 @@ Cape Town;19.01
 - Ideal para ambientes com recursos limitados
 
 🔹 Chunking Manual (Python Nativo com Divisão em Blocos)
-- Técnica de leitura em blocos (ex: 1 milhão de linhas por vez)
+- Técnica de leitura em blocos (ex: 1, 10, 50 e 100 milhões de linhas por vez)
 - Reduz picos de memória e melhora o controle do processamento
 - Útil para ajustes finos de performance e paralelização
 
@@ -300,7 +300,7 @@ A ETL rodou lisa, demorando 12.38 segundos e consumindo apenas 1.76 GiB de memó
 
 O benchmark conduzido com 1 bilhão de registros sintéticos de estações meteorológicas revela insights importantes sobre tempo de execução, uso de memória, tamanho dos arquivos e escalabilidade entre diferentes estratégias de processamento: Python puro, Pandas, abordagens com chunking, Polars e DuckDB.
 
-### 1. ⏱️ Tempo de Execução Total
+### 1. Tempo de Execução Total
 
 - DuckDB manteve seu desempenho superior, concluindo a ETL em apenas 12.38 segundos, mesmo com 1 bilhão de linhas.
 - Pandas com chunking foi a abordagem tradicional mais eficiente, concluindo em 348.58 segundos (~6 minutos).
@@ -314,7 +314,7 @@ DuckDB novamente se destaca por sua eficiência vetorizada e engine SQL em memó
 
 ---
 
-### 2. 💾 Pico de Uso de Memória RAM
+### 2. Pico de Uso de Memória RAM
 
 - Python + PyArrow (escrevendo apenas Parquet com PyArrow) foi o mais econômico, com pico de 1.2 GiB.
 - DuckDB também se manteve enxuto, consumindo apenas 1.76 GiB.
@@ -329,7 +329,7 @@ DuckDB e PyArrow mantêm uso controlado de memória. Abordagens com chunking con
 
 ---
 
-### 3. 📦 Tamanho dos Arquivos (MiB)
+### 3. Tamanho dos Arquivos (MiB)
 
 Todos os arquivos CSV têm tamanho semelhante (~252 KB). DuckDB gerou o menor .csv e também o .parquet mais compacto, evidenciando compressão eficiente e escrita otimizada.
 
@@ -355,21 +355,28 @@ Para pipelines de grande volume com baixa complexidade de transformação e foco
 - ➡️ DuckDB é a escolha mais enxuta, tanto em CSV quanto em Parquet.
 - ➡️ Parquet é amplamente superior ao CSV em termos de eficiência de armazenamento e preparo para análise.
 
-Nem todo projeto de dados exige alta performance ou infraestrutura distribuída, mas saber escolher a abordagem certa para o contexto certo é o que separa scripts rápidos de pipelines confiáveis e sustentáveis.
+---
 
-Seus testes mostraram que cada tecnologia se comporta de forma distinta frente a três fatores críticos: volume de dados, disponibilidade de memória RAM e necessidade de escalabilidade.
+## O DuckDB é tão excepcional que merece uma explicação um pouco mais detalhada
 
-Abaixo, a análise de cada abordagem sob esse prisma:
 
-#### DuckDB: rápido, leve e pronto para escalar localmente
+### DuckDB: rápido, leve e pronto para escalar localmente
 
-O DuckDB demonstrou ser o motor mais equilibrado para análises locais e pipelines de pequeno e médio porte.
-
-Por que funciona tão bem?
+DuckDB é uma excelente fonte para dashboards, se usado da maneira certa, o motor mais equilibrado para análises locais e pipelines de pequeno e médio porte, por que funciona tão bem?
 
 - Ele processa os dados direto do disco, sem precisar carregá-los inteiramente na memória.
 - Seu modelo de execução é colunar e vetorizado, o que significa que cada operação trabalha por blocos otimizados, aproveitando o cache do processador.
 - Funciona bem mesmo com apenas um núcleo (monothread), o que o torna ideal para ambientes simples, como notebooks ou servidores de uso geral.
+- Leitura muito rápida:
+- Consultas analíticas (`SELECT`, `GROUP BY`, `JOIN`) são extremamente otimizadas em DuckDB, principalmente em formatos como Parquet e CSV.
+- Ideal para painéis que consultam dados prontos, agregados.
+- Compatível com ODBC/ODBC-like connectors:
+- DuckDB oferece conectores (em evolução) para se integrar com BI tools, especialmente via drivers ODBC.
+- Já existem métodos para conectar o Power BI via ODBC e o Metabase via JDBC/ODBC (com algum esforço).
+- Formato leve e portátil:
+- O `.duckdb` é um único arquivo. Você pode gerar e compartilhar com o dashboard, sem precisar de um servidor de banco.
+- Integração com Parquet e CSV:
+- DuckDB pode ser usado para consultar diretamente arquivos Parquet/CSV como se fossem tabelas, útil quando seu dashboard é alimentado por arquivos externos.
 
 ✅ Ideal para protótipos rápidos e ETLs locais com performance real, ambientes com pouca RAM ou CPU
 
@@ -377,9 +384,9 @@ Por que funciona tão bem?
 
 O DuckDB é uma ferramenta poderosa, mas como toda tecnologia, tem um conjunto de casos para os quais é ideal e outros onde não é a melhor escolha, conforme segue:
 
-## ⚠️⚠️⚠️ DuckDB é excelente para prototipagem, análise local, cargas moderadas e dados tabulares em formato Parquet, CSV, Arrow, mas por que DuckDB não é geralmente indicado para produção?
+### ⚠️⚠️⚠️ DuckDB é excelente para prototipagem, análise local, cargas moderadas e dados tabulares em formato Parquet, CSV, Arrow, mas por que DuckDB não é geralmente indicado para produção?
 
-###  Limitações do DuckDB em produção, explicadas por contexto
+Nem todo projeto de dados exige alta performance ou infraestrutura distribuída, mas saber escolher a abordagem certa para o contexto certo é o que separa scripts rápidos de pipelines confiáveis e sustentáveis, seus testes mostraram que cada tecnologia se comporta de forma distinta frente a três fatores críticos: volume de dados, disponibilidade de memória RAM e necessidade de escalabilidade.
 
 #### 1. Arquitetura embutida, não cliente-servidor
 
@@ -398,7 +405,7 @@ O DuckDB é uma ferramenta poderosa, mas como toda tecnologia, tem um conjunto d
 
 ---
 
-### 3. Não é tolerante a falhas por padrão
+#### 3. Não é tolerante a falhas por padrão
 
 - Bancos de produção geralmente contam com replicação, backups automáticos, failover, logs de transação para recovery e DuckDB não implementa esses recursos nativamente.
 
@@ -406,7 +413,7 @@ O DuckDB é uma ferramenta poderosa, mas como toda tecnologia, tem um conjunto d
 
 ---
 
-### 4. Não escala horizontalmente
+#### 4. Não escala horizontalmente
 
 - DuckDB não possui arquitetura distribuída, ele não foi feito para escalar em múltiplas máquinas nem processar grandes volumes em cluster (como Spark, Dask, BigQuery, etc).
 
@@ -414,7 +421,7 @@ O DuckDB é uma ferramenta poderosa, mas como toda tecnologia, tem um conjunto d
 
 ---
 
-### 5. Foco principal é análise local — OLAP, não OLTP
+#### 5. Foco principal é análise local — OLAP, não OLTP
 
 - DuckDB é orientado a consultas analíticas complexas (OLAP), não a sistemas transacionais (OLTP), ele brilha ao fazer `SELECT station, AVG(temp)` em 100 milhões de linha, mas não serve bem para registrar pedidos de e-commerce ou gerenciar usuários de um app em tempo real.
 
@@ -430,68 +437,42 @@ Quando se trata de uso do DuckDB como fonte de dados para dashboards — como Po
 
 ---
 
-## ✅ DuckDB é uma excelente FONTE para dashboards... se usado da maneira certa
-
-### 🟢 Vantagens
-
-1. Leitura muito rápida:
-- Consultas analíticas (`SELECT`, `GROUP BY`, `JOIN`) são extremamente otimizadas em DuckDB, principalmente em formatos como Parquet e CSV.
-- Ideal para painéis que consultam dados prontos, agregados.
-2. Compatível com ODBC/ODBC-like connectors:
-- DuckDB oferece conectores (em evolução) para se integrar com BI tools, especialmente via drivers ODBC.
-- Já existem métodos para conectar o Power BI via ODBC e o Metabase via JDBC/ODBC (com algum esforço).
-3. Formato leve e portátil:
-- O `.duckdb` é um único arquivo. Você pode gerar e compartilhar com o dashboard, sem precisar de um servidor de banco.
-4. Integração com Parquet e CSV:
-- DuckDB pode ser usado para consultar diretamente arquivos Parquet/CSV como se fossem tabelas — útil quando seu dashboard é alimentado por arquivos externos.
-
----
-
-## ⚠️ Limitações e cuidados
-
-### 1. Não é um servidor de banco — logo, sem pooling, DuckDB não escuta conexões TCP como PostgreSQL/MySQL, cada dashboard teria que abrir a base localmente, o que não escala para múltiplos usuários. Uma solução parcial seria o uso do DuckDB em cenários de *data refresh batch*, ou seja, você gera um CSV ou Parquet com DuckDB e usa esse arquivo como fonte no Power BI ou Metabase, que apontam para ele.
-
-### 2. Sem controle de concorrência
-
-- Se dois dashboards tentarem acessar simultaneamente o mesmo arquivo `.duckdb`, pode haver corrupção ou travamento, a recomendação é que evite `.duckdb` como fonte compartilhada de leitura concorrente em dashboards, prefira extrair e gerar `.parquet` ou `.csv` de leitura rápida.
-
-
-## ✅ Recomendações práticas
+### Recomendações práticas
 ![duckDB](image-4.png)
-
----
-
-## 💡 Conclusão
 
 DuckDB é extremamente eficaz para gerar datasets analíticos e alimentadores de dashboard, mas não é ideal como fonte de dados dinâmica e concorrente.
 
-✅ Use DuckDB para processar e entregar dados prontos para visualização.
-
-⚠️ Evite usá-lo como backend direto em dashboards multiusuário em produção.
-
-💡 Melhor estratégia: DuckDB → Parquet → Dashboard.
-
+- Use DuckDB para processar e entregar dados prontos para visualização.
+- Evite usá-lo como backend direto em dashboards multiusuário em produção.
+- Melhor estratégia: DuckDB → Parquet → Dashboard.
 
 ---
 
 ## MAIN TECHNICAL FEATURES
 
-✅ Modular function design (read, calculate, format, log)
+✅ Processamento de 1 bilhão de registros (~14GB) com múltiplas abordagens: Python puro, Pandas, chunking manual, PyArrow, Polars e DuckDB.
 
-✅ Log file with timestamps and emojis for readability
+✅ Benchmark completo avaliando tempo de execução, uso de memória e tamanho de arquivos de saída (.csv e .parquet).
 
-✅ Automatic folder creation for logs
+✅ Geração realista de dados sintéticos, com distribuição uniforme entre estações meteorológicas e variação controlada de temperatura.
 
-✅ Fast performance with native Python (no Pandas or NumPy required)
+✅ Chunking com controle de memória, permitindo processar arquivos massivos sem sobrecarregar a RAM.
 
-✅ Friendly CLI usage, expandable to larger systems
+✅ Uso avançado do DuckDB, engine analítica colunar SQL-in-process, com leitura direta do disco e escrita compacta.
+
+✅ Visualização e storytelling analítico com gráficos comparativos de tempo, memória e espaço.
+
+✅ Script modular em Python, com logging, organização em camadas (src/, data/, logs/) e suporte a múltiplos formatos.
+
+✅ Ambiente isolado com Pyenv e Poetry, garantindo reprodutibilidade e controle de dependências.
+
+✅ Padrões de codificação e segurança com pre-commit hooks, linting (ruff, black) e auditoria de dependências (pip-audit).
+
+✅ Foco educacional e de portfólio, com documentação detalhada, orientada à performance, arquitetura e boas práticas.
 
 ---
 
 Project carried out with the support of Artificial Intelligence (ChatGPT)
-
-For future improvements: extraction of real data with cleaning and transformation, followed by loading into a Data Warehouse, possibly in a cloud provider, also, an ETL orchestrated with Apache Airflow and best CI/CD practices
-
 
 ## QUESTIONS, SUGGESTIONS OR FEEDBACK
 
