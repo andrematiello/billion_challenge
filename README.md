@@ -53,15 +53,20 @@ Além do processamento eficiente, o projeto oferece um dashboard interativo cons
 O desafio proposto neste projeto consiste em desenvolver uma solução robusta, eficiente e escalável em Python capaz de processar 1 bilhão de registros de temperatura, simulando um ambiente real de engenharia de dados com alta volumetria. O foco está na extração de estatísticas agregadas por estação meteorológica, com ênfase em performance, uso consciente de recursos computacionais e entrega analítica final em múltiplos formatos.
 
 ✅ Objetivos Técnicos:
+
 🔹 Ler com eficiência um arquivo de entrada contendo 1 bilhão de linhas, simulando medições massivas de sensores meteorológicos, mesmo em ambientes com recursos limitados.
+
 🔹 Calcular estatísticas agregadas por estação, incluindo:
     📉 Temperatura mínima registrada
     📈 Temperatura máxima registrada
     📊 Temperatura média, com precisão de 2 casas decimais
+
 🔹 Ordenar os resultados alfabeticamente pelo nome da estação, garantindo legibilidade e estrutura analítica nos arquivos de saída.
+
 🔹 Exportar os resultados finais em formatos amplamente utilizados:
     .csv para compatibilidade com qualquer ferramenta
     .parquet para alta performance e compressão eficiente
+
 🔹 Comparar diferentes abordagens técnicas, avaliando:
     ⏱️ Tempo de execução
     💾 Uso de memória RAM
@@ -86,13 +91,13 @@ Os nomes são extraídos do arquivo model.csv, contendo uma lista de localidades
 Antes de iniciar a geração, o sistema calcula uma estimativa de espaço em disco com base na quantidade de estações, na média de caracteres por linha e no formato do dado, auxiliando no planejamento de infraestrutura.
 
 🌡️ Geração Sintética de Temperaturas Aleatórias
-Para cada linha, é atribuída uma temperatura float entre -99.9°C e 99.9°C, simulando leituras sensoriais. A seleção das estações segue distribuição uniforme com random.choices().
+Para cada linha, é atribuída uma temperatura float entre -99.9°C e 99.9°C, simulando leituras sensoriais, a seleção das estações segue distribuição uniforme com random.choices().
 
 📁 Escrita do Arquivo data/weather_stations.csv
-As medições são geradas em lotes e salvas diretamente em disco no formato delimitado por ponto e vírgula (;). O nome da estação e a temperatura são armazenados por linha, mantendo consistência e portabilidade.
+As medições são geradas em lotes e salvas diretamente em disco no formato delimitado por ponto e vírgula (;), o nome da estação e a temperatura são armazenados por linha, mantendo consistência e portabilidade.
 
 📦 Processamento em Batches (100 Milhões por Lote)
-A escrita é realizada em blocos de 100_000_000 registros por vez, reduzindo o impacto de I/O e melhorando drasticamente a performance de gravação. Uma barra de progresso (tqdm) exibe o avanço da geração.
+A escrita é realizada em blocos de 100_000_000 registros por vez, reduzindo o impacto de I/O e melhorando drasticamente a performance de gravação, uma barra de progresso (tqdm) exibe o avanço da geração.
 
 ⏱️ Monitoramento e Medição de Performance
 Ao final da execução, o script exibe o tempo total decorrido e o tamanho real do arquivo gerado, validando a estimativa inicial e permitindo benchmarking do processo.
@@ -122,11 +127,13 @@ Cape Town;19.01
 
 Durante o desenvolvimento deste projeto, diversas boas práticas de engenharia de dados foram aplicadas, aliando performance, clareza e adaptabilidade. Desde a geração de dados até as estratégias de leitura e processamento, cada etapa foi pensada para refletir desafios reais enfrentados por engenheiros de dados em ambientes com recursos limitados.
 
-A geração do arquivo de 1 bilhão de linhas evitou o uso do round() tradicional, optando por interpolação de strings (f"{x:.1f}") para controlar casas decimais com melhor desempenho. A distribuição dos nomes das estações meteorológicas foi feita com random.choices() para simular uniformidade geográfica realista. A escrita dos dados foi realizada em blocos (batch write), reduzindo drasticamente o tempo de I/O — uma otimização essencial quando se trabalha com arquivos massivos.
+A geração do arquivo de 1 bilhão de linhas evitou o uso do round() tradicional, optando por interpolação de strings (f"{x:.1f}") para controlar casas decimais com melhor desempenho.
+A distribuição dos nomes das estações meteorológicas foi feita com random.choices() para simular uniformidade geográfica realista, a escrita dos dados foi realizada em blocos (batch write), reduzindo drasticamente o tempo de I/O, uma otimização essencial quando se trabalha com arquivos massivos.
 
 Antes mesmo da geração dos dados, o script realiza uma estimativa precisa do tamanho esperado em disco, auxiliando no planejamento de infraestrutura. Ao longo da execução, mensagens informativas e uma barra de progresso mantêm o usuário bem informado, com validações robustas e opções de ajuda acessíveis por linha de comando.
 
-Na etapa de processamento, diferentes abordagens foram implementadas para comparar desempenho, escalabilidade e consumo de memória: desde leitura linha a linha com agregações em tempo real em dicionários (ideal para máquinas com pouca RAM), até chunking manual e com Pandas, permitindo maior controle e performance em pipelines iterativos. Também foi incluído o uso do DuckDB, uma engine colunar embutida que executa consultas SQL diretamente sobre arquivos .csv e .parquet, entregando performance próxima de sistemas distribuídos — mas sem a complexidade de um cluster.
+Na etapa de processamento, diferentes abordagens foram implementadas para comparar desempenho, escalabilidade e consumo de memória, desde leitura linha a linha com agregações em tempo real em dicionários (ideal para máquinas com pouca RAM), até chunking manual e com Pandas, permitindo maior controle e performance em pipelines iterativos.
+Também foi incluído o uso do DuckDB, uma engine colunar embutida que executa consultas SQL diretamente sobre arquivos .csv e .parquet, entregando performance próxima de sistemas distribuídos, mas sem a complexidade de um cluster.
 
 Essa combinação de técnicas oferece um estudo de caso valioso para quem busca aprender ou ensinar práticas reais de engenharia de dados com foco em desempenho, boas escolhas arquiteturais e domínio técnico sobre o stack Python moderno.
 
@@ -215,10 +222,10 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 
 ---
 
-## BENCHMARKING AND PERFORMANCE
+## BENCHMARKING AND PERFORMANCE RESULTS ✨
 
 ### PYTHON
-🔴 Python vanilla, sem utilização de ulimit ou cgroups, a ETL quebrou por 6 vezes, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
+🔴 Python vanilla, sem utilização de ulimit ou cgroups, a ETL quebrou por 6 vezes, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp.
 
 🟨 Python Vanilla com melhorias de performance, a ETL rodou satisfatoriamente, demorando 726.20 segundos (pouco mais de 12 minutos) e consumindo apenas 1.5 GiB de memória RAM, no momento de pico de utilização do sistema.
 
@@ -232,16 +239,16 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 ---
 
 ### PYTHON + PANDAS
-🔴 Python + Pandas na leitura e no processamento, a ETL quebrou por 3 vezes, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
+🔴 Python + Pandas na leitura e no processamento, a ETL quebrou por 3 vezes, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp.
 
 🟨 Python + Pandas na leitura e no processamento + utilização de técnica de chunking, a ETL rodou satisfatoriamente, rodou com chuncking de 100 milhões de linhas, demorando 348.58 segundos (quase 6 minutos) e consumindo 10 GiB de memória RAM, no momento de pico de utilização do sistema.
 
 ---
 
 ### PYTHON + POLARS
-🔴 Python + Polars na leitura e no processamento, a ETL quebrou por 3 vezes, em 5 segundos, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
+🔴 Python + Polars na leitura e no processamento, a ETL quebrou por 3 vezes, em 5 segundos, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp.
 
-🔴 Python + Polars na leitura e no processamento + utilização de técnica de paralelismo, a ETL quebrou por 3 vezes, em 5 segundos, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
+🔴 Python + Polars na leitura e no processamento + utilização de técnica de paralelismo, a ETL quebrou por 3 vezes, em 5 segundos, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp.
 
 ---
 
@@ -312,9 +319,7 @@ Para pipelines de grande volume com baixa complexidade de transformação e foco
 
 ## 📋 Funcionalidades do Dashboard
 
-Este dashboard interativo em **Streamlit** exibe e explora estatísticas climáticas agregadas por estação meteorológica. As principais funcionalidades incluem:
-
----
+Este dashboard interativo em Streamlit exibe e explora estatísticas climáticas agregadas por estação meteorológica. As principais funcionalidades incluem:
 
 ### 🔍 Leitura e Visualização de Dados
 
@@ -323,34 +328,25 @@ Este dashboard interativo em **Streamlit** exibe e explora estatísticas climát
 - Exibição interativa da tabela completa com estatísticas por estação.
 - Feedback visual de sucesso ou erro no carregamento dos dados.
 
----
 
 ### 📊 Visualizações Gráficas Interativas
 
-1. **📈 Temperatura Média por Estação**
+1.  Temperatura Média por Estação
     - Gráfico de barras com valores médios por estação.
-2. **🌡️ Temperatura Mínima por Estação**
+2.  Temperatura Mínima por Estação
     - Gráfico de barras colorido com escala azul para destacar variações de mínimas.
-3. **🔥 Temperatura Máxima por Estação**
+3.  Temperatura Máxima por Estação
     - Gráfico de barras com coloração em tons de vermelho para destacar extremos.
-4. **📍 Dispersão: Mínima vs Máxima**
+4.  Dispersão: Mínima vs Máxima
     - Gráfico de dispersão (scatter plot) com cada ponto representando uma estação.
     - Eixo X: Temperatura mínima
     - Eixo Y: Temperatura máxima
     - Tamanho dos pontos baseado na temperatura média (normalizada)
 
----
-
-### ⚙️ Tecnologias Utilizadas
-
-- **Streamlit**: Framework web para dashboards em Python.
-- **Plotly Express**: Gráficos interativos com visual moderno.
-- **Pandas**: Leitura e manipulação de dados tabulares.
-- **Pathlib**: Manipulação segura de caminhos de arquivos.
 
 ---
 
-## ✨ O DuckDB é tão excepcional que merece uma explicação um pouco mais detalhada
+## ✨ 🦆 O DuckDB é tão excepcional que merece uma explicação um pouco mais detalhada
 
 
 ### DuckDB: rápido, leve e pronto para escalar localmente
@@ -471,10 +467,17 @@ DuckDB é extremamente eficaz para gerar datasets analíticos e alimentadores de
 
 ## TECHNOLOGIES USED
 
-### 🛠️ Project Stack Overview
+### 🛠️ Project Stack Challenge Overview
 
 ![stack](image-6.png)
 
+
+### Tecnologias Utilizadas no Dashboard
+
+- Streamlit: Framework web para dashboards em Python.
+- Plotly Express: Gráficos interativos com visual moderno.
+- Pandas: Leitura e manipulação de dados tabulares.
+- Pathlib: Manipulação segura de caminhos de arquivos.
 ---
 
 ## QUESTIONS, SUGGESTIONS OR FEEDBACK
