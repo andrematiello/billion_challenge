@@ -188,12 +188,12 @@ python etl_pandas_chuncking.py
 
 5) Instale a biblioteca DuckDB, utilizando o Poetry, com o comando:
 ```python
-poetry add DuckDB
+poetry add duckdb
 ```
 
 6) DuckDB
 ```python
-python etl_DuckDB.py
+python etl_duckdb.py
 ```
 
 ---
@@ -205,10 +205,10 @@ Todos os resultados finais são exportados nos formatos .csv e .parquet
 Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apache Superset ou puro Python, inclusive, o arquivo de saída será ordenado alfabeticamente por nome da estação:
 
 ```python
-| Estação | Min | Média | Max|
+| Estação    |   Min  | Média |  Max  |
 | ---------- | ------ | ----- | ----- |
-| Aabenraa| -99.80 | 3.4| 99.80 |
-| Bariloche  | -57.40 | 8.2| 87.30 |
+| Aabenraa   | -99.80 | 3.4   | 99.80 |
+| Bariloche  | -57.40 | 8.2   | 87.30 |
 | Copenhagen | -45.50 | 11.9  | 94.10 |
 ```
 
@@ -217,44 +217,35 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 ## BENCHMARKING AND PERFORMANCE
 
 ### PYTHON
-🔴 Python vanilla, sem utilização de ulimit ou cgroups.
-A ETL quebrou por 6 vezes, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
+🔴 Python vanilla, sem utilização de ulimit ou cgroups, a ETL quebrou por 6 vezes, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
 
-🟨 Python Vanilla com melhorias de performance:
-A ETL rodou satisfatoriamente, demorando 726.20 segundos (pouco mais de 12 minutos) e consumindo apenas 1.5 GiB de memória RAM, no momento de pico de utilização do sistema.
+🟨 Python Vanilla com melhorias de performance, a ETL rodou satisfatoriamente, demorando 726.20 segundos (pouco mais de 12 minutos) e consumindo apenas 1.5 GiB de memória RAM, no momento de pico de utilização do sistema.
 
-🟨 Python com a utilização de técnica de chunking
-A ETL rodou sofrida, não aguentou com chuncking de 100 milhões de linhas, quebrando duas vezes, rodando com chuncking de 50 milhões de linhas em 20 etapas, demorando 1436.41 segundos (quase 24 minutos) e consumindo 12.2 GiB de memória RAM, no momento de pico de utilização do sistema.
+🟨 Python com a utilização de técnica de chunking, a ETL rodou sofrida, não aguentou com chuncking de 100 milhões de linhas, quebrando duas vezes, rodando com chuncking de 50 milhões de linhas em 20 etapas, demorando 1436.41 segundos (quase 24 minutos) e consumindo 12.2 GiB de memória RAM, no momento de pico de utilização do sistema.
 
 ---
 
 ### PYTHON + PYARROW
-🟨 Python com a utilização da biblioteca pyarrow apenas para gravar o parquet.
-A ETL rodou satisfatoriamente, demorando 711.31 segundos (quase 12 minutos) e consumindo apenas 1.2 GiB de memória RAM, no momento de pico de utilização do sistema.
+🟨 Python com a utilização da biblioteca pyarrow apenas para gravar o parquet, a ETL rodou satisfatoriamente, demorando 711.31 segundos (quase 12 minutos) e consumindo apenas 1.2 GiB de memória RAM, no momento de pico de utilização do sistema.
 
 ---
 
 ### PYTHON + PANDAS
-🔴 Python + Pandas na leitura e no processamento
-A ETL quebrou por 3 vezes, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
+🔴 Python + Pandas na leitura e no processamento, a ETL quebrou por 3 vezes, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
 
-🟨 Python + Pandas na leitura e no processamento + utilização de técnica de chunking
-A ETL rodou satisfatoriamente, rodou com chuncking de 100 milhões de linhas, demorando 348.58 segundos (quase 6 minutos) e consumindo 10 GiB de memória RAM, no momento de pico de utilização do sistema.
+🟨 Python + Pandas na leitura e no processamento + utilização de técnica de chunking, a ETL rodou satisfatoriamente, rodou com chuncking de 100 milhões de linhas, demorando 348.58 segundos (quase 6 minutos) e consumindo 10 GiB de memória RAM, no momento de pico de utilização do sistema.
 
 ---
 
 ### PYTHON + POLARS
-🔴 Python + Polars na leitura e no processamento
-A ETL quebrou por 3 vezes, em 5 segundos, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
+🔴 Python + Polars na leitura e no processamento, a ETL quebrou por 3 vezes, em 5 segundos, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
 
-🔴 Python + Polars na leitura e no processamento + utilização de técnica de paralelismo
-A ETL quebrou por 3 vezes, em 5 segundos, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
+🔴 Python + Polars na leitura e no processamento + utilização de técnica de paralelismo, a ETL quebrou por 3 vezes, em 5 segundos, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
 
 ---
 
-### DuckDB
-🟢 Utilização do banco de dados DuckDB 🥇 🏆
-A ETL rodou lisa, demorando 12.38 segundos e consumindo apenas 1.76 GiB de memória RAM, no momento de pico de utilização do sistema.
+### DuckDB 🥇 🏆
+🟢 Utilização do banco de dados DuckDB, a ETL rodou lisa, demorando 12.38 segundos e consumindo apenas 1.76 GiB de memória RAM, no momento de pico de utilização do sistema.
 
 
 ## CONCLUSION
@@ -292,7 +283,7 @@ DuckDB e PyArrow mantêm uso controlado de memória. Abordagens com chunking con
 
 ### 3. Tamanho dos Arquivos (MiB)
 
-Todos os arquivos CSV têm tamanho semelhante (~252 KB). DuckDB gerou o menor .csv e também o .parquet mais compacto, evidenciando compressão eficiente e escrita otimizada.
+Todos os arquivos CSV têm tamanho semelhante (~252 KB), o DuckDB gerou o menor .csv e também o .parquet mais compacto, evidenciando compressão eficiente e escrita otimizada.
 
 ![total_file_size](image-2.png)
 
@@ -318,7 +309,7 @@ Para pipelines de grande volume com baixa complexidade de transformação e foco
 
 ---
 
-## O DuckDB é tão excepcional que merece uma explicação um pouco mais detalhada
+## ✨ O DuckDB é tão excepcional que merece uma explicação um pouco mais detalhada
 
 
 ### DuckDB: rápido, leve e pronto para escalar localmente
@@ -341,11 +332,11 @@ DuckDB é uma excelente fonte para dashboards, se usado da maneira certa, o moto
 
 ✅ Ideal para protótipos rápidos e ETLs locais com performance real, ambientes com pouca RAM ou CPU
 
-############################### ⛔ CUIDADO ###############################
+############################### MAS CUIDADO ⛔ ###############################
 
 O DuckDB é uma ferramenta poderosa, mas como toda tecnologia, tem um conjunto de casos para os quais é ideal e outros onde não é a melhor escolha, conforme segue:
 
-### ⚠️⚠️⚠️ DuckDB é excelente para prototipagem, análise local, cargas moderadas e dados tabulares em formato Parquet, CSV, Arrow, mas por que DuckDB não é geralmente indicado para produção?
+### ⚠️ DuckDB é excelente para prototipagem, análise local, cargas moderadas e dados tabulares em formato Parquet, CSV, Arrow, mas por que DuckDB não é geralmente indicado para produção?
 
 Nem todo projeto de dados exige alta performance ou infraestrutura distribuída, mas saber escolher a abordagem certa para o contexto certo é o que separa scripts rápidos de pipelines confiáveis e sustentáveis, seus testes mostraram que cada tecnologia se comporta de forma distinta frente a três fatores críticos: volume de dados, disponibilidade de memória RAM e necessidade de escalabilidade.
 
@@ -394,7 +385,7 @@ Nem todo projeto de dados exige alta performance ou infraestrutura distribuída,
 
 ![alt text](image-5.png)
 
-Quando se trata de uso do DuckDB como fonte de dados para dashboards — como Power BI, Metabase, Superset ou até Streamlit — a análise muda bastante, e a resposta é "depende do uso, mas com ressalvas importantes".
+Quando se trata de uso do DuckDB como fonte de dados para dashboards, como Power BI, Metabase, Superset ou até Streamlit, a análise muda bastante, e a resposta é "depende do uso, mas com ressalvas importantes".
 
 ---
 
