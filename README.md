@@ -1,4 +1,4 @@
-# ONE BILLION ROWS CHALLENGE - PYTHON EDITION
+EDITIONd# ONE BILLION ROWS CHALLENGE - PYTHON EDITION
 
 ## ABOUT THE PROJECT
 
@@ -65,7 +65,7 @@ O arquivo de entrada contém medições de temperatura de diferentes estações 
 
 5. Cria medições com temperaturas aleatórias entre -99.9°C e 99.9°C e gera o arquivo `data/weather_stations.csv`.
 
-6. Utiliza processamento em batches de 10.000 registros para melhor desempenho de escrita e apresenta uma barra de progresso ao longo da execução.
+6. Utiliza processamento em batches de 100.000.000 registros para melhor desempenho de escrita e apresenta uma barra de progresso ao longo da execução.
 
 7. Medições de Performance sendo que ao final, mostra o tempo total de execução e o tamanho real do arquivo gerado.
 
@@ -186,14 +186,14 @@ python etl_pandas.py
 python etl_pandas_chuncking.py
 ```
 
-5) Instale a biblioteca duckDB, utilizando o Poetry, com o comando:
+5) Instale a biblioteca DuckDB, utilizando o Poetry, com o comando:
 ```python
-poetry add duckdb
+poetry add DuckDB
 ```
 
-6) duckDB
+6) DuckDB
 ```python
-python etl_duckDB.py
+python etl_DuckDB.py
 ```
 
 ---
@@ -211,45 +211,6 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 | Bariloche  | -57.40 | 8.2| 87.30 |
 | Copenhagen | -45.50 | 11.9  | 94.10 |
 ```
-
----
-
-## TECHNOLOGIES USED
-
-### PROJECT SUPPORT
-
-🔹 Poetry para gerenciamento de dependências
-
-🔹 Pyenv para isolamento de ambientes
-
-🔹 Pre-commit hooks:
-- trailing-whitespace
-- end-of-file-fixer
-- check-yaml
-- check-added-large-files
-- check-json
-- check-merge-conflict
-- check-case-conflict
-
-🔹 Pip-audit
-
-🔹 Black
-
-🔹 Ruff
-
----
-
-### PROJECT DEVELOPMENT
-
-🔹Python 3.11+
-
-🔹Pandas
-
-🔹Pyarrow
-
-🔹Polars
-
-🔹DuckDB
 
 ---
 
@@ -291,8 +252,8 @@ A ETL quebrou por 3 vezes, em 5 segundos, consumindo os 16 GiB (15.3) de memóri
 
 ---
 
-### duckDB
-🟢 Utilização do banco de dados duckDB 🥇 🏆
+### DuckDB
+🟢 Utilização do banco de dados DuckDB 🥇 🏆
 A ETL rodou lisa, demorando 12.38 segundos e consumindo apenas 1.76 GiB de memória RAM, no momento de pico de utilização do sistema.
 
 
@@ -374,7 +335,7 @@ DuckDB é uma excelente fonte para dashboards, se usado da maneira certa, o moto
 - DuckDB oferece conectores (em evolução) para se integrar com BI tools, especialmente via drivers ODBC.
 - Já existem métodos para conectar o Power BI via ODBC e o Metabase via JDBC/ODBC (com algum esforço).
 - Formato leve e portátil:
-- O `.duckdb` é um único arquivo. Você pode gerar e compartilhar com o dashboard, sem precisar de um servidor de banco.
+- O `.DuckDB` é um único arquivo. Você pode gerar e compartilhar com o dashboard, sem precisar de um servidor de banco.
 - Integração com Parquet e CSV:
 - DuckDB pode ser usado para consultar diretamente arquivos Parquet/CSV como se fossem tabelas, útil quando seu dashboard é alimentado por arquivos externos.
 
@@ -399,7 +360,7 @@ Nem todo projeto de dados exige alta performance ou infraestrutura distribuída,
 #### 2. Não suporta múltiplas sessões concorrentes de escrita
 
 - Em bancos como PostgreSQL, múltiplos processos podem ler e escrever simultaneamente, com controle de transações.
-- O DuckDB só permite uma escrita por vez e ainda bloqueia arquivos `.duckdb` durante a operação.
+- O DuckDB só permite uma escrita por vez e ainda bloqueia arquivos `.DuckDB` durante a operação.
 
 👉 Consequência: Impraticável em ambientes multiusuário, com alta taxa de gravação ou uso concorrente, como APIs, microsserviços e sistemas OLTP.
 
@@ -438,7 +399,7 @@ Quando se trata de uso do DuckDB como fonte de dados para dashboards — como Po
 ---
 
 ### Recomendações práticas
-![duckDB](image-4.png)
+![DuckDB](image-4.png)
 
 DuckDB é extremamente eficaz para gerar datasets analíticos e alimentadores de dashboard, mas não é ideal como fonte de dados dinâmica e concorrente.
 
@@ -472,11 +433,18 @@ DuckDB é extremamente eficaz para gerar datasets analíticos e alimentadores de
 
 ---
 
-Project carried out with the support of Artificial Intelligence (ChatGPT)
+## TECHNOLOGIES USED
+
+### 🛠️ Project Stack Overview
+
+![stack](image-6.png)
+
+---
 
 ## QUESTIONS, SUGGESTIONS OR FEEDBACK
 
 🚀 André Matiello C. Caramanti - [matiello.andre@hotmail.com](mailto:matiello.andre@hotmail.com)
+Project carried out with the support of Artificial Intelligence (ChatGPT)
 
 ---
 
