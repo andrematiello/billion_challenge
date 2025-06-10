@@ -2,7 +2,7 @@
 
 ## ABOUT THE PROJECT
 
-Uma jornada prática e realista de engenharia de dados para processar 1 bilhão de registros, extraindo estatísticas agregadas de temperatura com performance, escalabilidade em Python, utilizando o projeto **One Billion Row Challenge**, desenvolvido como um exercício avançado de engenharia de dados aplicada, com o objetivo de demonstrar como processar com eficiência um arquivo massivo de 1 bilhão de linhas (~14GB) usando Python, cujo foco está em realizar operações computacionalmente intensas como agregações (mínimo, média e máximo) e ordenação com uso criterioso de recursos computacionais, de forma escalável.
+Uma jornada prática e realista de engenharia de dados para processar 1 bilhão de registros, extraindo estatísticas agregadas de temperatura com performance, escalabilidade em Python, utilizando o projeto One Billion Row Challenge, desenvolvido como um exercício avançado de engenharia de dados aplicada, com o objetivo de demonstrar como processar com eficiência um arquivo massivo de 1 bilhão de linhas (~14GB) usando Python, cujo foco está em realizar operações computacionalmente intensas como agregações (mínimo, média e máximo) e ordenação com uso criterioso de recursos computacionais, de forma escalável.
 
 Este projeto é particularmente útil como estudo de caso para engenheiros de dados, cientistas de dados e desenvolvedores que desejam aprofundar seus conhecimentos em processamento de arquivos massivos, estratégias de chunking, desempenho de bibliotecas Python e uso de engines analíticas modernas como o DuckDB e embora o One Billion Row Challenge não seja um projeto técnico, ele simula situações reais de negócio enfrentadas por empresas que lidam com grandes volumes de dados transacionais, sensoriais ou operacionais.
 
@@ -56,6 +56,8 @@ Desenvolver soluções em Python para:
 
 O arquivo de entrada contém medições de temperatura de diferentes estações meteorológicas, com o seguinte formato por linha:
 
+---
+
 ### GENERAL OPERATION
 
 1. Validação dos Argumentos, pois o script recebe como argumento a quantidade de linhas a serem geradas.
@@ -71,6 +73,8 @@ O arquivo de entrada contém medições de temperatura de diferentes estações 
 6. Utiliza processamento em batches de 10.000 registros para melhor desempenho de escrita e apresenta uma barra de progresso ao longo da execução.
 
 7. Medições de Performance sendo que ao final, mostra o tempo total de execução e o tamanho real do arquivo gerado.
+
+---
 
 ### OUTPUT FILE
 
@@ -89,6 +93,7 @@ Stockholm;-5.32
 São Paulo;25.85
 Cape Town;19.01
 ```
+---
 
 ### INTERESTING TECHNICAL POINTS
 
@@ -98,6 +103,7 @@ Cape Town;19.01
 - Estima o uso de disco antes da geração, com função personalizada para conversão de bytes
 - Fornece mensagens amigáveis de erro e ajuda ao usuário
 
+---
 
 ### IMPLEMENTED APPROACHES
 
@@ -146,6 +152,8 @@ Neste projeto, vamos utilizar o Python 3.11.4
 3. Poetry: Este projeto utiliza Poetry para gerenciamento de dependências.
 [Instruções de instalação do Poetry aqui](https://python-poetry.org/docs/#installation).
 
+---
+
 ### INSTALAÇÃO E CONFIGURAÇÃO
 
 A - Execute o comando, passando os argumentos da quantidade de linhas que quer gerar:
@@ -155,9 +163,15 @@ python create_measurements.py 1_000_000_000
 ```
 ---
 
-B - Entre no diretório `/data/`e execute o comando, de acordo com a ferramenta e amodelagem de dados desejada:
+B - Confirmar a quantidade de linhas e o formato do arquivo gerado:
+```python
+wc -l ../data/weather_stations.csv
+head -n 5 ../data/weather_stations.csv
+```
 
-i) Python
+C - Entre no diretório `/data/`e execute o comando, de acordo com a ferramenta e amodelagem de dados desejada:
+
+i) Python - processamento BRUTO com `defaultdict`, utilizando Python vanilla!
 ```python
 python etl_python.py
 ```
@@ -178,7 +192,7 @@ python etl_pandas_chuncking.py
 ```
 ---
 
-C - Instale a biblioteca duckDB, utilizando o Poetry, com o comando:
+D - Instale a biblioteca duckDB, utilizando o Poetry, com o comando:
 ```python
 poetry add duckdb
 ```
@@ -188,11 +202,13 @@ v) duckDB
 python etl_duckDB.py
 ```
 
+---
+
 ## OUTPUT EXAMPLES
 
 Todos os resultados finais são exportados nos formatos .csv e .parquet
 
-Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apache Superset ou puro Python.Formato de saída (ordenado alfabeticamente por nome da estação):
+Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apache Superset ou puro Python, inclusive, o arquivo de saída será ordenado alfabeticamente por nome da estação:
 
 ```python
 | Estação    | Min    | Média | Max   |
@@ -227,6 +243,7 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 
 🔹 Ruff
 
+---
 
 ### PROJECT DEVELOPMENT
 
@@ -234,20 +251,111 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 
 🔹Pandas
 
-🔹DuckDB
+🔹Pyarrow
 
 🔹Polars
+
+🔹DuckDB
 
 ---
 
 ## BENCHMARKING AND PERFORMANCE
 
-Método	Tempo Estimado	Uso de Memória	Comentários
-Python Nativo (streaming)	Alto	Muito baixo	Alta compatibilidade com ambientes limitados
-Chunking Manual	Médio	Controlado	Equilíbrio entre controle e simplicidade
-Pandas Completo	Baixo*	Alto	Muito rápido, mas exige boa RAM
-Pandas com Chunking	Médio-baixo	Controlado	Ótima relação performance/memória
-DuckDB SQL	Baixo	Muito baixo	Ideal para pipelines analíticos colunarizados
+### PYTHON
+🔴 Python vanilla, sem utilização de ulimit ou cgroups.
+A ETL quebrou por 6 vezes, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
+
+🟨 Python Vanilla com melhorias de performance:
+A ETL rodou satisfatoriamente, demorando 726.20 segundos (pouco mais de 12 minutos) e consumindo apenas 1.5 GiB de memória RAM, no momento de pico de utilização do sistema.
+
+🟨 Python com a utilização de técnica de chunking
+A ETL rodou sofrida, não aguentou com chuncking de 100 milhões de linhas, quebrando duas vezes, rodando com chuncking de 50 milhões de linhas em 20 etapas, demorando 1436.41 segundos (quase 24 minutos) e consumindo 12.2 GiB de memória RAM, no momento de pico de utilização do sistema.
+
+---
+
+### PYTHON + PYARROW
+🟨 Python com a utilização da biblioteca pyarrow apenas para gravar o parquet.
+A ETL rodou satisfatoriamente, demorando 711.31 segundos (quase 12 minutos) e consumindo apenas 1.2 GiB de memória RAM, no momento de pico de utilização do sistema.
+
+---
+
+### PYTHON + PANDAS
+🔴 Python + Pandas na leitura e no processamento
+A ETL quebrou por 3 vezes, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
+
+🟨 Python + Pandas na leitura e no processamento + utilização de técnica de chunking
+A ETL rodou satisfatoriamente, rodou com chuncking de 100 milhões de linhas, demorando 348.58 segundos (quase 6 minutos) e consumindo 10 GiB de memória RAM, no momento de pico de utilização do sistema.
+
+---
+
+### PYTHON + POLARS
+🔴 Python + Polars na leitura e no processamento
+A ETL quebrou por 3 vezes, em 5 segundos, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
+
+🔴 Python + Polars na leitura e no processamento + utilização de técnica de paralelismo
+A ETL quebrou por 3 vezes, em 5 segundos, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp
+
+---
+
+### duckDB
+🟢 Utilização do banco de dados duckDB 🥇 🏆
+A ETL rodou lisa, demorando 12.38 segundos e consumindo apenas 1.76 GiB de memória RAM, no momento de pico de utilização do sistema.
+
+
+## CONCLUSION
+
+O benchmark conduzido com 1 bilhão de registros sintéticos de estações meteorológicas revela insights importantes sobre tempo de execução, uso de memória, tamanho dos arquivos e escalabilidade entre diferentes estratégias de processamento: Python puro, Pandas, abordagens com chunking, Polars e DuckDB.
+
+### 1. ⏱️ Tempo de Execução Total
+
+- DuckDB manteve seu desempenho superior, concluindo a ETL em apenas 12.38 segundos, mesmo com 1 bilhão de linhas.
+- Pandas com chunking foi a abordagem tradicional mais eficiente, concluindo em 348.58 segundos (~6 minutos).
+- Python puro com melhorias levou 726.20 segundos (~12 minutos), com performance estável.
+- Python com chunking precisou de múltiplas etapas (20 chunks de 50 milhões), totalizando 1436.41 segundos (~24 minutos).
+- As abordagens com Polars e Pandas sem chunking falharam devido ao estouro de memória, não completando a execução.
+
+![total_time](image.png)
+
+DuckDB novamente se destaca por sua eficiência vetorizada e engine SQL em memória. Chunking com Pandas ou Python é mais lento, mas confiável quando há limitação de RAM.
+
+---
+
+### 2. 💾 Pico de Uso de Memória RAM
+
+- Python + PyArrow (escrevendo apenas Parquet com PyArrow) foi o mais econômico, com pico de 1.2 GiB.
+- DuckDB também se manteve enxuto, consumindo apenas 1.76 GiB.
+- Python + melhorias estabilizou em 1.5 GiB.
+- Pandas com chunking usou 10 GiB, demonstrando bom controle.
+- Python com chunking chegou a 12.2 GiB.
+- Pandas, Polars e outras abordagens sem chunking estouraram os 16 GiB de RAM + 4 GiB de swap, travando a execução.
+
+![total_memory](image-1.png)
+
+DuckDB e PyArrow mantêm uso controlado de memória. Abordagens com chunking consomem mais, mas são seguras. Estratégias sem chunking falham com volumes bilionários.
+
+---
+
+### 3. 📦 Tamanho dos Arquivos (MiB)
+
+Todos os arquivos CSV têm tamanho semelhante (~252 KB). DuckDB gerou o menor .csv e também o .parquet mais compacto, evidenciando compressão eficiente e escrita otimizada.
+
+![total_file_size](image-2.png)
+
+### ## Considerações de Arquitetura e Escalabilidade
+
+- DuckDB permanece como a opção mais rápida, leve e escalável para análise local, com excelente performance mesmo com 1 bilhão de registros.
+- Pandas + chunking se mostra um bom compromisso para ambientes com restrição de memória, sem comprometer robustez.
+- Python puro com chunking é funcional, mas requer ajustes e monitoramento rigoroso de recursos.
+- Polars ainda não sustentou o volume testado — falhou em todas as tentativas mesmo com paralelismo ativado.
+
+### ## Recomendação Final
+
+Para pipelines de grande volume com baixa complexidade de transformação e foco em performance:
+
+- ✅ DuckDB continua imbatível: rápido, econômico e com boa compressão.
+- 🟡 Pandas com chunking é seguro, compatível e fácil de manter.
+- 🟡 Python com chunking é defensável, mas exige mais trabalho manual.
+- 🔴 Abordagens sem chunking não são recomendadas acima de 1 bilhão de linhas.
 
 ---
 
@@ -272,7 +380,7 @@ For future improvements: extraction of real data with cleaning and transformatio
 
 ## QUESTIONS, SUGGESTIONS OR FEEDBACK
 
-**🚀 André Matiello C. Caramanti - [matiello.andre@hotmail.com](mailto:matiello.andre@hotmail.com)**
+🚀 André Matiello C. Caramanti - [matiello.andre@hotmail.com](mailto:matiello.andre@hotmail.com)
 
 ---
 

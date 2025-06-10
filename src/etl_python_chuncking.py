@@ -203,7 +203,7 @@ OUTPUT_CSV_PATH = BASE_DIR / "data" / "measurements_python_chunk.csv"  # Saída 
 OUTPUT_PARQUET_PATH = (
     BASE_DIR / "data" / "measurements_python_chunk.parquet"
 )  # Saída Parquet
-CHUNK_SIZE = 10_000_000  # Número de linhas lidas por chunk
+CHUNK_SIZE = 50_000_000  # Número de linhas lidas por chunk
 
 # Garante que os diretórios 'data' e 'logs' existem
 LOG_PATH.parent.mkdir(parents=True, exist_ok=True)

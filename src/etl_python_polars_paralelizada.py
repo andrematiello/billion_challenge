@@ -31,22 +31,18 @@ def log_step(step: str, status: str) -> None:
         print(f"[LOG ERROR] Failed to write log: {e}")
 
 
-# 📥 Lê CSV e processa com Polars usando paralelismo interno
-def read_and_aggregate_with_polars(path_to_csv: Path) -> pl.DataFrame:
+# 📥 Lê e processa com Polars Lazy (streaming seguro)
+def read_and_aggregate_with_polars_lazy(path_to_csv: Path) -> pl.DataFrame:
     try:
-        print("📥 Lendo arquivo CSV com Polars (usando paralelismo)...")
-        df = pl.read_csv(
-            path_to_csv,
-            separator=";",
-            has_header=False,
-            new_columns=["station", "temperature"],
-            low_memory=True,
-            rechunk=True,
-            parallel=True,
-        )
-        print("📊 Agrupando e agregando...")
-        result = (
-            df.group_by("station")
+        print("📥 Lendo arquivo CSV com Polars (modo lazy)...")
+        df_lazy = (
+            pl.scan_csv(
+                path_to_csv,
+                separator=";",
+                has_header=False,
+                new_columns=["station", "temperature"],
+            )
+            .group_by("station")
             .agg(
                 [
                     pl.col("temperature").min().alias("min"),
@@ -63,11 +59,12 @@ def read_and_aggregate_with_polars(path_to_csv: Path) -> pl.DataFrame:
                 ]
             )
         )
-        log_step("Read and aggregate (Polars)", f"Success: {result.height} stations")
-        print(f"✅ Aggregation complete: {result.height} stations")
-        return result
+        df = df_lazy.collect()
+        log_step("Read and aggregate (Polars lazy)", f"Success: {df.height} stations")
+        print(f"✅ Aggregation complete: {df.height} stations")
+        return df
     except Exception as e:
-        log_step("Read and aggregate (Polars)", f"Failed: {e}")
+        log_step("Read and aggregate (Polars lazy)", f"Failed: {e}")
         raise
 
 
@@ -92,13 +89,13 @@ def save_results(df: pl.DataFrame, csv_path: Path, parquet_path: Path) -> None:
 
 # 🔁 Pipeline principal
 def process_with_polars():
-    print("🚀 Starting temperature processing with Polars...")
+    print("🚀 Starting temperature processing with Polars (lazy)...")
     start = time.time()
-    df = read_and_aggregate_with_polars(PATH_CSV)
+    df = read_and_aggregate_with_polars_lazy(PATH_CSV)
     save_results(df, OUTPUT_CSV_PATH, OUTPUT_PARQUET_PATH)
     elapsed = time.time() - start
     print(f"⏱️  Total processing completed in {elapsed:.2f} seconds.")
-    log_step("⏱️  Total processing (Polars)", f"Completed in {elapsed:.2f} seconds")
+    log_step("⏱️  Total processing (Polars lazy)", f"Completed in {elapsed:.2f} seconds")
 
 
 # ▶️ Execução
@@ -117,4 +114,4 @@ if __name__ == "__main__":
             process_with_polars()
         except Exception as e:
             print(f"❌ Processing failed: {e}")
-            log_step("Process temperatures (Polars)", f"Failed: {e}")
+            log_step("Process temperatures (Polars lazy)", f"Failed: {e}")

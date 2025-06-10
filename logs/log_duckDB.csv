@@ -19,3 +19,17 @@ LINE 9:                 GROUP BY station
 2025-06-06T20:45:19.478084,-----,-----
 2025-06-06T20:45:19.490249,Exportação para Parquet,✅ Success
 2025-06-06T20:45:19.490303,Processamento finalizado,✅ Completed in 1.29 seconds
+2025-06-09T23:15:21.038630,Conexão DuckDB,✅ Success
+2025-06-09T23:15:33.377768,Agregação executada,✅ Success
+2025-06-09T23:15:33.379727,Contagem de estações,✅ Success: 8893 stations processed
+2025-06-09T23:15:33.383306,Exportação para CSV,✅ Success
+2025-06-09T23:15:33.383349,-----,-----
+2025-06-09T23:15:33.386503,Exportação para Parquet,✅ Success
+2025-06-09T23:15:33.386550,Processamento finalizado,✅ Completed in 12.38 seconds
+2025-06-09T23:16:05.527367,Conexão DuckDB,✅ Success
+2025-06-09T23:16:17.931313,Agregação executada,✅ Success
+2025-06-09T23:16:17.932584,Contagem de estações,✅ Success: 8893 stations processed
+2025-06-09T23:16:17.935559,Exportação para CSV,✅ Success
+2025-06-09T23:16:17.935598,-----,-----
+2025-06-09T23:16:17.937665,Exportação para Parquet,✅ Success
+2025-06-09T23:16:17.937711,Processamento finalizado,✅ Completed in 12.42 seconds
