@@ -18,25 +18,32 @@ O desafio foi inspirado no projeto original [1BRC](https://github.com/gunnarmorl
 
 A seguir, destacam-se os principais problemas que esse case ajuda a resolver:
 
-➡️ 1. Processamento de Grandes Volumes de Dados em Arquivos Brutos
+➡️ 1. Processamento de Grandes Volumes de Dados em Arquivos Brutos.
+
 Quando empresas frequentemente recebem dados em formatos como .csv, .json ou .parquet contendo milhões ou bilhões de linhas, especialmente em setores como varejo, energia, climatologia, IoT e telecom, demonstrando como ler, limpar e agregar dados diretamente de arquivos massivos, sem a necessidade imediata de carregar tudo na memória ou depender de clusters caros.
 
-➡️ 2. Cálculo Eficiente de Estatísticas Agregadas
+➡️ 2. Cálculo Eficiente de Estatísticas Agregadas.
+
 Por meio da análise de dados operacionais exige cálculos como média, máximo e mínimo, que parecem simples, mas se tornam desafiadores com grande volume e múltiplas chaves, o case mostra como aplicar estratégias otimizadas de agregação, inclusive via DuckDB ou Pandas com chunking, simulando o cálculo de indicadores operacionais em escala.
 
-➡️ 3. Desempenho e Otimização de Recursos Computacionais
+➡️ 3. Desempenho e Otimização de Recursos Computacionais.
+
 Quando projetos de dados nem sempre rodam em ambientes robustos, muitos times enfrentam limitações de RAM, CPU e I/O, especialmente em pipelines locais, servidores intermediários ou jobs agendados, explorando estratégias de baixo consumo de memória, chunking e uso de engines colunares (como DuckDB) que permitem otimizar desempenho mesmo em máquinas comuns.
 
-➡️ 4. Validação de Arquiteturas Analíticas para Batch Processing
+➡️ 4. Validação de Arquiteturas Analíticas para Batch Processing.
+
 No processo de validação, por exemplo, se uma arquitetura (ex: processamento local + exportação .parquet) atende aos SLAs de tempo e custo antes de mover dados para a nuvem, fornecendo um sandbox completo e replicável, permitindo testar pipelines de processamento, benchmarkar formatos de arquivo e comparar abordagens de leitura e agregação.
 
-➡️ 5. Treinamento e Capacitação Técnica de Times de Dados
+➡️ 5. Treinamento e Capacitação Técnica de Times de Dados.
+
 Para formar times com maturidade em engenharia de dados exige cases práticos e desafiadores, que vão além de notebooks pequenos ou datasets de toy, demonstrando ser um estudo de caso avançado que pode ser usado para treinar engenheiros, analistas e cientistas de dados, com foco em performance, arquitetura de dados e boas práticas de codificação.
 
-➡️ 6. Exportação de Dados para Consumo em BI e Visualizações
+➡️ 6. Exportação de Dados para Consumo em BI e Visualizações.
+
 Etapa comum a necessidade de transformar arquivos brutos em formatos eficientes para dashboards (como .csv limpo ou .parquet otimizado), gerando outputs padronizados e ordenados para ingestão por ferramentas como Power BI, Metabase, Superset ou soluções em nuvem, com foco em consumo rápido e leve.
 
-➡️ 7. Visualização Interativa com Dashboards Locais
+➡️ 7. Visualização Interativa com Dashboards Locais.
+
 Além do processamento eficiente, o projeto oferece um dashboard interativo construído com Streamlit, que consome os dados já tratados e fornece visualizações dinâmicas, permitindo a exploração dos dados agregados por estação meteorológica. Essa visualização inclui gráficos de barras para temperaturas mínima, média e máxima, além de uma dispersão entre os extremos térmicos, tudo isso com carregamento rápido e sem necessidade de servidores externos, cuja abordagem facilita a análise exploratória local e demonstra como entregar valor analítico direto ao usuário final mesmo em ambientes de infraestrutura simples.
 
 ---
