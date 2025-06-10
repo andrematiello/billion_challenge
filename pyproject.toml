@@ -26,7 +26,8 @@ dependencies = [
     "streamlit (>=1.45.1,<2.0.0)",
     "pyarrow (>=20.0.0,<21.0.0)",
     "matplotlib (>=3.10.3,<4.0.0)",
-    "requests (==2.32.4)"
+    "requests (==2.32.4)",
+    "plotly (>=6.1.2,<7.0.0)"
 ]
 
 
