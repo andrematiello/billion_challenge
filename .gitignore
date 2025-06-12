@@ -2,7 +2,8 @@ docs/logs/*
 !docs/logs/.gitkeep
 
 data/*
-!data/output/.gitkeep
+!data/.gitkeep
+!data/model.csv
 
 .vscode/
 site_packages.py
