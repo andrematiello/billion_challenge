@@ -37,11 +37,11 @@
     - [PYTHON + POLARS](#python--polars)
     - [DuckDB 🥇 🏆](#duckdb--)
   - [CONCLUSÃO](#conclusão)
-    - [1. Tempo de Execução Total](#1-tempo-de-execução-total)
-    - [2. Pico de Uso de Memória RAM](#2-pico-de-uso-de-memória-ram)
-    - [3. Tamanho dos Arquivos (MiB)](#3-tamanho-dos-arquivos-mib)
-    - [Considerações de Arquitetura e Escalabilidade](#considerações-de-arquitetura-e-escalabilidade)
-    - [Recomendações Finais](#recomendações-finais)
+    - [1. TEMPO DE EXECUÇÃO TOTAL](#1-tempo-de-execução-total)
+    - [2. PICO DE UTILIZAÇÃO DE MEMÓRIA RAM](#2-pico-de-utilização-de-memória-ram)
+    - [3. TAMANHO DOS ARQUIVOS DE SAÍDA (MiB)](#3-tamanho-dos-arquivos-de-saída-mib)
+    - [CONIDERAÇÕES DE ARQUITETURA E DE ESCALABILIDADE](#coniderações-de-arquitetura-e-de-escalabilidade)
+    - [RECOMENDAÇÕES FINAIS](#recomendações-finais)
   - [FUNCIONALIDADES DO DASHBOARD](#funcionalidades-do-dashboard)
     - [LEITURA E VISUALIZAÇÃO DOS DADOS](#leitura-e-visualização-dos-dados)
     - [VISUALIZAÇÕES GRÁFICAS INTERATIVAS](#visualizações-gráficas-interativas)
@@ -340,7 +340,7 @@ Durante o desenvolvimento do desafio, foi instalado recurso Early Out-Of-Memory 
 
 O benchmark conduzido com 1 bilhão de registros sintéticos de estações meteorológicas revela insights importantes sobre tempo de execução, uso de memória, tamanho dos arquivos e escalabilidade entre diferentes estratégias de processamento: Python puro, Pandas, abordagens com chunking, Polars e DuckDB.
 
-### 1. Tempo de Execução Total
+### 1. TEMPO DE EXECUÇÃO TOTAL
 
 - DuckDB manteve seu desempenho superior, concluindo a ETL em apenas 12.38 segundos, mesmo com 1 bilhão de linhas.
 - Pandas com chunking foi a abordagem tradicional mais eficiente, concluindo em 348.58 segundos (~6 minutos).
@@ -352,7 +352,7 @@ O benchmark conduzido com 1 bilhão de registros sintéticos de estações meteo
 
 ---
 
-### 2. Pico de Uso de Memória RAM
+### 2. PICO DE UTILIZAÇÃO DE MEMÓRIA RAM
 
 - Python + PyArrow (escrevendo apenas Parquet com PyArrow) foi o mais econômico, com pico de 1.2 GiB.
 - DuckDB também se manteve enxuto, consumindo apenas 1.76 GiB.
@@ -365,7 +365,7 @@ O benchmark conduzido com 1 bilhão de registros sintéticos de estações meteo
 
 ---
 
-### 3. Tamanho dos Arquivos (MiB)
+### 3. TAMANHO DOS ARQUIVOS DE SAÍDA (MiB)
 
 Todos os arquivos CSV têm tamanho semelhante (~252 KB), o DuckDB gerou o menor `.csv` e também o `.parquet` mais compacto, evidenciando compressão eficiente e escrita otimizada.
 
@@ -373,14 +373,14 @@ Todos os arquivos CSV têm tamanho semelhante (~252 KB), o DuckDB gerou o menor 
 
 ---
 
-### Considerações de Arquitetura e Escalabilidade
+### CONIDERAÇÕES DE ARQUITETURA E DE ESCALABILIDADE
 
 - DuckDB permanece como a opção mais rápida, leve e escalável para análise local, com excelente performance mesmo com 1 bilhão de registros.
 - Pandas + chunking se mostra um bom compromisso para ambientes com restrição de memória, sem comprometer robustez.
 - Python puro com chunking é funcional, mas requer ajustes e monitoramento rigoroso de recursos.
 - Polars ainda não sustentou o volume testado, falhou em todas as tentativas mesmo com paralelismo ativado.
 
-### Recomendações Finais
+### RECOMENDAÇÕES FINAIS
 
 Para pipelines de grande volume com baixa complexidade de transformação e foco em performance:
 
