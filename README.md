@@ -219,7 +219,7 @@ python etl_duckdb.py
 ```
 ### LOGGING
 
-Todos os processamentos estão sendo gravados no diretório `logs`com seu respectivo nome do arquivo.
+Todos os processamentos estão sendo gravados no diretório `logs` com seu respectivo nome do arquivo.
 
 ---
 
@@ -286,7 +286,7 @@ O benchmark conduzido com 1 bilhão de registros sintéticos de estações meteo
 - Python com chunking precisou de múltiplas etapas (20 chunks de 50 milhões), totalizando 1436.41 segundos (~24 minutos).
 - As abordagens com Polars e Pandas sem chunking falharam devido ao estouro de memória, não completando a execução.
 
-![total_time](image.png)
+![total_time](assets/image.png)
 
 ---
 
@@ -299,7 +299,7 @@ O benchmark conduzido com 1 bilhão de registros sintéticos de estações meteo
 - Python com chunking chegou a 12.2 GiB.
 - Pandas, Polars e outras abordagens sem chunking estouraram os 16 GiB de RAM + 4 GiB de swap, travando a execução.
 
-![total_memory](image-1.png)
+![total_memory](assets/image-1.png)
 
 ---
 
@@ -307,7 +307,7 @@ O benchmark conduzido com 1 bilhão de registros sintéticos de estações meteo
 
 Todos os arquivos CSV têm tamanho semelhante (~252 KB), o DuckDB gerou o menor `.csv` e também o `.parquet` mais compacto, evidenciando compressão eficiente e escrita otimizada.
 
-![total_file_size](image-2.png)
+![total_file_size](assets/image-2.png)
 
 ---
 
@@ -448,14 +448,14 @@ Nem todo projeto de dados exige alta performance ou infraestrutura distribuída,
 
 ### Use DuckDB com confiança para:
 
-![alt text](image-5.png)
+![alt text](assets/image-3.png)
 
 Quando se trata de uso do DuckDB como fonte de dados para dashboards, como Power BI, Metabase, Superset ou até Streamlit, a análise muda bastante, e a resposta é "depende do uso, mas com ressalvas importantes".
 
 ---
 
 ### Recomendações práticas
-![DuckDB](image-4.png)
+![DuckDB](assets/image-4.png)
 
 DuckDB é extremamente eficaz para gerar datasets analíticos e alimentadores de dashboard, mas não é ideal como fonte de dados dinâmica e concorrente.
 
@@ -493,7 +493,7 @@ DuckDB é extremamente eficaz para gerar datasets analíticos e alimentadores de
 
 ### 🛠️ Project Stack Challenge Overview
 
-![stack](image-6.png)
+![stack](image-5.png)
 
 
 ### Tecnologias Utilizadas no Dashboard
