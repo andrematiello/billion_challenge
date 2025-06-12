@@ -1,9 +1,28 @@
+![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-FINAL-lightgrey)
+
+<p align="right">
+  <a href="EN-README.md">
+    <img src="assets/us.png" width="18" alt="English version" title="English version"> English
+  </a>
+</p>
+
+<a href="https://www.flaticon.com/free-icons/etl" title="ETL icons">
+  <img align="left" alt="Ícone ETL" height="45" width="45" src="./assets/etl.png">
+</a>
+
+<br>
+
+> Projeto de Engenharia de Dados com foco em **ETL local, benchmarking, visualização interativa e uso estratégico do DuckDB**, idealizado como estudo de caso realista para portfólio profissional.
+
+
 # ONE BILLION ROWS CHALLENGE - PYTHON EDITION🐍
 
-## 📚 SUMÁRIO
+## SUMÁRIO
 
 - [ONE BILLION ROWS CHALLENGE - PYTHON EDITION🐍](#one-billion-rows-challenge---python-edition)
-  - [📚 SUMÁRIO](#-sumário)
+  - [SUMÁRIO](#sumário)
   - [SOBRE O PROJETO](#sobre-o-projeto)
   - [INSPIRAÇÃO](#inspiração)
   - [PROBLEMA DE NEGÓCIO](#problema-de-negócio)
@@ -41,8 +60,8 @@
     - [UTILIZE DUCKDB COM SEGURANÇA PARA:](#utilize-duckdb-com-segurança-para)
     - [RECOMENDAÇÕES PRÁTICAS](#recomendações-práticas)
   - [FUNCIONALIDADES TÉCNICAS PRINCIPAIS](#funcionalidades-técnicas-principais)
-    - [STACK DO PROJETO](#stack-do-projeto)
-    - [TECNOLOGIAS UTILIZADAS](#tecnologias-utilizadas)
+  - [STACK DO PROJETO](#stack-do-projeto)
+    - [DEPENDÊNCIAS DO PROJETO (POETRY)](#dependências-do-projeto-poetry)
   - [DÚVIDAS, SUGESTÕES OU FEEDBACK](#dúvidas-sugestões-ou-feedback)
   - [LICENÇA](#licença)
 
@@ -530,17 +549,47 @@ DuckDB é extremamente eficaz para gerar datasets analíticos e alimentadores de
 
 ---
 
-### STACK DO PROJETO
+## STACK DO PROJETO
 
 ![recomendations](assets/image-5.png)
 
 
-### TECNOLOGIAS UTILIZADAS
+### DEPENDÊNCIAS DO PROJETO (POETRY)
 
-- Streamlit: Framework web para dashboards em Python.
-- Plotly Express: Gráficos interativos com visual moderno.
-- Pandas: Leitura e manipulação de dados tabulares.
-- Pathlib: Manipulação segura de caminhos de arquivos.
+O projeto utiliza um ambiente isolado com gerenciamento de dependências via `Poetry`, garantindo reprodutibilidade e portabilidade.
+
+Abaixo estão listadas as principais dependências com suas versões controladas:
+
+```toml
+# Extraído de pyproject.toml
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = ">=2.2.3,<3.0.0"
+polars = ">=1.30.0,<2.0.0"
+duckdb = ">=1.3.0,<2.0.0"
+pyarrow = ">=20.0.0,<21.0.0"
+streamlit = ">=1.45.1,<2.0.0"
+plotly = ">=6.1.2,<7.0.0"
+matplotlib = ">=3.10.3,<4.0.0"
+tqdm = ">=4.67.1,<5.0.0"
+requests = "==2.32.4"
+python-dotenv = ">=1.1.0,<2.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=8.4.0,<9.0.0"
+mkdocs = ">=1.6.1,<2.0.0"
+pre-commit = ">=4.2.0,<5.0.0"
+ignr = ">=2.2,<3.0"
+black = ">=25.1.0,<26.0.0"
+ruff = ">=0.11.12,<0.12.0"
+pip-audit = ">=2.9.0,<3.0.0"
+taskipy = ">=1.14.1,<2.0.0"
+github-cli = ">=1.0.0,<2.0.0"
+```
+
+Essas dependências refletem um ecossistema moderno, seguro e eficiente, alinhado com boas práticas de engenharia de dados e desenvolvimento Python.
+
 ---
 
 ## DÚVIDAS, SUGESTÕES OU FEEDBACK
