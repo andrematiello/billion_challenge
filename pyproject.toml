@@ -1,9 +1,9 @@
 [project]
 name = "billion-challenge"
 version = "0.1.0"
-description = ""
+description = "ONE BILLION ROWS CHALLENGE - PYTHON EDITION🐍"
 authors = [
-    {name = "Andre Matiello Caramanti",email = "matiello.andre@hotmail.com"}
+    {name = "Andre Matiello Caramanti", email = "matiello.andre@hotmail.com"}
 ]
 license = {text = "MIT"}
 readme = "README.md"

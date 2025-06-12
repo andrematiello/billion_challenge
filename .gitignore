@@ -8,7 +8,13 @@ data/*
 site_packages.py
 
 logs/log_python.csv
-# Byte-compiled / optimized / DLL files
+
+dashboard/app_table.py
+dashboard/dash_all.py
+
+logs/*
+
+
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/python
