@@ -1,12 +1,14 @@
-# ONE BILLION ROWS CHALLENGE - PYTHON EDITION
+# ONE BILLION ROWS CHALLENGE - PYTHON EDITION🐍
 
 ## ABOUT THE PROJECT
 
-Uma jornada prática de engenharia de dados para processar 1 bilhão de registros, extraindo estatísticas agregadas de temperatura com performance, escalabilidade em Python, utilizando o projeto One Billion Row Challenge, desenvolvido como um exercício avançado de engenharia de dados aplicada, com o objetivo de demonstrar como processar com eficiência um arquivo massivo de 1 bilhão de linhas (~14GB) usando Python, cujo foco está em realizar operações computacionalmente intensas como agregações (mínimo, média e máximo) e ordenação com uso criterioso de recursos computacionais, de forma escalável.
+✨ Uma jornada prática de engenharia de dados para processar 1 bilhão de registros, extraindo estatísticas agregadas de temperatura com performance, escalabilidade em Python, utilizando o projeto One Billion Row Challenge, desenvolvido como um exercício avançado de engenharia de dados aplicada, com o objetivo de demonstrar como processar com eficiência um arquivo massivo de 1 bilhão de linhas (~14GB) usando Python, cujo foco está em realizar operações computacionalmente simples, como agregações (mínimo, média e máximo) e ordenação com uso de recursos computacionais, de forma escalável.
 
-Como complemento visual e analítico, o projeto inclui um dashboard interativo desenvolvido em Streamlit, que consome os dados processados e permite ao usuário explorar visualmente as estatísticas por estação meteorológica, cujo painel apresenta uma tabela dinâmica com os dados agregados, gráficos de barras para temperatura média, mínima e máxima, além de um gráfico de dispersão cruzando extremos térmicos, tudo isso com visualização responsiva e performance local, sem necessidade de infraestrutura em nuvem.
+Como complemento visual e analítico, o projeto inclui um dashboard interativo desenvolvido em Streamlit, com caráter de portfolio, sem utilização prática, que consome os dados processados e permite ao usuário explorar visualmente as estatísticas por estação meteorológica, cujo painel apresenta uma tabela dinâmica com os dados agregados, gráficos de barras para temperatura média, mínima e máxima, além de um gráfico de dispersão cruzando extremos térmicos, tudo isso com visualização responsiva e performance local, sem necessidade de infraestrutura em nuvem.
 
 Este projeto é particularmente útil como estudo de caso para engenheiros de dados, cientistas de dados e desenvolvedores que desejam aprofundar seus conhecimentos em processamento de arquivos massivos, estratégias de chunking, desempenho de bibliotecas Python e uso de engines analíticas modernas como o DuckDB, e embora o One Billion Row Challenge não seja um projeto técnico, ele simula situações reais de negócio enfrentadas por empresas que lidam com grandes volumes de dados transacionais, sensoriais ou operacionais.
+
+Todo o desafio foi executado em um ambiente local (homelab), utilizando um Dell Optiplex 7020, com sistema operacional Ubuntu Server, processador Intel Core i5-14500T e 16 GiB de memória RAM.
 
 ## INSPIRATION
 
@@ -18,31 +20,31 @@ O desafio foi inspirado no projeto original [1BRC](https://github.com/gunnarmorl
 
 A seguir, destacam-se os principais problemas que esse case ajuda a resolver:
 
-➡️ 1. Processamento de Grandes Volumes de Dados em Arquivos Brutos.
+🔹 Processamento de Grandes Volumes de Dados em Arquivos Brutos.
 
-Quando empresas frequentemente recebem dados em formatos como .csv, .json ou .parquet contendo milhões ou bilhões de linhas, especialmente em setores como varejo, energia, climatologia, IoT e telecom, demonstrando como ler, limpar e agregar dados diretamente de arquivos massivos, sem a necessidade imediata de carregar tudo na memória ou depender de clusters caros.
+Quando empresas frequentemente recebem dados em formatos como `.csv`, `.json` ou `.parquet` contendo milhões ou bilhões de linhas, especialmente em setores como varejo, energia, climatologia, IoT e telecom, demonstrando como ler, limpar e agregar dados diretamente de arquivos massivos, sem a necessidade imediata de carregar tudo na memória ou depender de clusters caros.
 
-➡️ 2. Cálculo Eficiente de Estatísticas Agregadas.
+🔹 Cálculo Eficiente de Estatísticas Agregadas.
 
 Por meio da análise de dados operacionais exige cálculos como média, máximo e mínimo, que parecem simples, mas se tornam desafiadores com grande volume e múltiplas chaves, o case mostra como aplicar estratégias otimizadas de agregação, inclusive via DuckDB ou Pandas com chunking, simulando o cálculo de indicadores operacionais em escala.
 
-➡️ 3. Desempenho e Otimização de Recursos Computacionais.
+🔹 Desempenho e Otimização de Recursos Computacionais.
 
 Quando projetos de dados nem sempre rodam em ambientes robustos, muitos times enfrentam limitações de RAM, CPU e I/O, especialmente em pipelines locais, servidores intermediários ou jobs agendados, explorando estratégias de baixo consumo de memória, chunking e uso de engines colunares (como DuckDB) que permitem otimizar desempenho mesmo em máquinas comuns.
 
-➡️ 4. Validação de Arquiteturas Analíticas para Batch Processing.
+🔹 Validação de Arquiteturas Analíticas para Batch Processing.
 
-No processo de validação, por exemplo, se uma arquitetura (ex: processamento local + exportação .parquet) atende aos SLAs de tempo e custo antes de mover dados para a nuvem, fornecendo um sandbox completo e replicável, permitindo testar pipelines de processamento, benchmarkar formatos de arquivo e comparar abordagens de leitura e agregação.
+No processo de validação, por exemplo, se uma arquitetura (ex: processamento local + exportação `.parquet`) atende aos SLAs de tempo e custo antes de mover dados para a nuvem, fornecendo um sandbox completo e replicável, permitindo testar pipelines de processamento, benchmarkar formatos de arquivo e comparar abordagens de leitura e agregação.
 
-➡️ 5. Treinamento e Capacitação Técnica de Times de Dados.
+🔹 Treinamento e Capacitação Técnica de Times de Dados.
 
 Para formar times com maturidade em engenharia de dados exige cases práticos e desafiadores, que vão além de notebooks pequenos ou datasets de toy, demonstrando ser um estudo de caso avançado que pode ser usado para treinar engenheiros, analistas e cientistas de dados, com foco em performance, arquitetura de dados e boas práticas de codificação.
 
-➡️ 6. Exportação de Dados para Consumo em BI e Visualizações.
+🔹 Exportação de Dados para Consumo em BI e Visualizações.
 
-Etapa comum a necessidade de transformar arquivos brutos em formatos eficientes para dashboards (como .csv limpo ou .parquet otimizado), gerando outputs padronizados e ordenados para ingestão por ferramentas como Power BI, Metabase, Superset ou soluções em nuvem, com foco em consumo rápido e leve.
+Etapa comum a necessidade de transformar arquivos brutos em formatos eficientes para dashboards (como `.csv` limpo ou `.parquet` otimizado), gerando outputs padronizados e ordenados para ingestão por ferramentas como Power BI, Metabase, Superset ou soluções em nuvem, com foco em consumo rápido e leve.
 
-➡️ 7. Visualização Interativa com Dashboards Locais.
+🔹 Visualização Interativa com Dashboards Locais.
 
 Além do processamento eficiente, o projeto oferece um dashboard interativo construído com Streamlit, que consome os dados já tratados e fornece visualizações dinâmicas, permitindo a exploração dos dados agregados por estação meteorológica. Essa visualização inclui gráficos de barras para temperaturas mínima, média e máxima, além de uma dispersão entre os extremos térmicos, tudo isso com carregamento rápido e sem necessidade de servidores externos, cuja abordagem facilita a análise exploratória local e demonstra como entregar valor analítico direto ao usuário final mesmo em ambientes de infraestrutura simples.
 
@@ -50,28 +52,17 @@ Além do processamento eficiente, o projeto oferece um dashboard interativo cons
 
 ## PROPOSED CHALLENGE
 
-O desafio proposto neste projeto consiste em desenvolver uma solução robusta, eficiente e escalável em Python capaz de processar 1 bilhão de registros de temperatura, simulando um ambiente real de engenharia de dados com alta volumetria. O foco está na extração de estatísticas agregadas por estação meteorológica, com ênfase em performance, uso consciente de recursos computacionais e entrega analítica final em múltiplos formatos.
-
-✅ Objetivos Técnicos:
+O desafio proposto neste projeto consiste em desenvolver uma solução robusta, eficiente e escalável em Python capaz de processar 1 bilhão de registros de temperatura, simulando um ambiente real de engenharia de dados com alta volumetria. O foco está na extração de estatísticas agregadas por estação meteorológica, com ênfase em performance, uso consciente de recursos computacionais e entrega analítica final em múltiplos formatos, com os seguintes objetivos técnicos:
 
 🔹 Ler com eficiência um arquivo de entrada contendo 1 bilhão de linhas, simulando medições massivas de sensores meteorológicos, mesmo em ambientes com recursos limitados.
 
-🔹 Calcular estatísticas agregadas por estação, incluindo:
-    📉 Temperatura mínima registrada
-    📈 Temperatura máxima registrada
-    📊 Temperatura média, com precisão de 2 casas decimais
+🔹 Calcular estatísticas agregadas por estação, incluindo a Temperatura mínima registrada, Temperatura máxima registrada e Temperatura média, com precisão de 2 casas decimais
 
 🔹 Ordenar os resultados alfabeticamente pelo nome da estação, garantindo legibilidade e estrutura analítica nos arquivos de saída.
 
-🔹 Exportar os resultados finais em formatos amplamente utilizados:
-    .csv para compatibilidade com qualquer ferramenta
-    .parquet para alta performance e compressão eficiente
+🔹 Exportar os resultados finais em formatos amplamente utilizados `.csv` para compatibilidade com qualquer ferramenta e `.parquet` para alta performance e compressão eficiente
 
-🔹 Comparar diferentes abordagens técnicas, avaliando:
-    ⏱️ Tempo de execução
-    💾 Uso de memória RAM
-    📦 Tamanho dos arquivos gerados
-    ⚙️ Escalabilidade e estabilidade de cada solução
+🔹 Comparar diferentes abordagens técnicas, avaliando o Tempo de execução, o Uso de memória RAM e o Tamanho dos arquivos gerados, tendo em norte a escalabilidade e estabilidade de cada solução.
 
 Essas comparações cobrem soluções desde Python puro até DuckDB, passando por Pandas, chunking manual e PyArrow, evidenciando as vantagens, limitações e comportamentos esperados em pipelines analíticos de larga escala.
 
@@ -81,38 +72,36 @@ Essas comparações cobrem soluções desde Python puro até DuckDB, passando po
 
 A geração do dataset sintético com 1 bilhão de linhas foi cuidadosamente projetada para simular condições realistas de ingestão massiva de dados sensoriais, adotando estratégias eficientes de escrita e controle de performance. Abaixo, o fluxo operacional detalhado:
 
-🔍 Validação dos Argumentos de Entrada
+🔹 Validação dos Argumentos de Entrada
 O script principal (create_measurements.py) valida se foi passado um argumento numérico representando a quantidade de linhas desejada (ex: 1_000_000_000), garantindo flexibilidade e controle de escala.
 
-🌍 Coleta de Nomes de Estações Meteorológicas
+🔹 Coleta de Nomes de Estações Meteorológicas
 Os nomes são extraídos do arquivo model.csv, contendo uma lista de localidades reais. Linhas comentadas com # são ignoradas e duplicatas são automaticamente removidas, garantindo um conjunto limpo de estações válidas.
 
-📏 Estimativa de Tamanho do Arquivo Final
+🔹 Estimativa de Tamanho do Arquivo Final
 Antes de iniciar a geração, o sistema calcula uma estimativa de espaço em disco com base na quantidade de estações, na média de caracteres por linha e no formato do dado, auxiliando no planejamento de infraestrutura.
 
-🌡️ Geração Sintética de Temperaturas Aleatórias
+🔹 Geração Sintética de Temperaturas Aleatórias
 Para cada linha, é atribuída uma temperatura float entre -99.9°C e 99.9°C, simulando leituras sensoriais, a seleção das estações segue distribuição uniforme com random.choices().
 
-📁 Escrita do Arquivo data/weather_stations.csv
+🔹 Escrita do Arquivo data/weather_stations.csv
 As medições são geradas em lotes e salvas diretamente em disco no formato delimitado por ponto e vírgula (;), o nome da estação e a temperatura são armazenados por linha, mantendo consistência e portabilidade.
 
-📦 Processamento em Batches (100 Milhões por Lote)
+🔹 Processamento em Batches (100 Milhões por Lote)
 A escrita é realizada em blocos de 100_000_000 registros por vez, reduzindo o impacto de I/O e melhorando drasticamente a performance de gravação, uma barra de progresso (tqdm) exibe o avanço da geração.
 
-⏱️ Monitoramento e Medição de Performance
+🔹 Monitoramento e Medição de Performance
 Ao final da execução, o script exibe o tempo total decorrido e o tamanho real do arquivo gerado, validando a estimativa inicial e permitindo benchmarking do processo.
 
 ---
 
 ### OUTPUT FILE
 
-Arquivo gerado `data/weather_stations.csv` em 6 min e 5 seg, com 14.8 GiB, somando 1 bilhão de linhas.
+Arquivo gerado `data/weather_stations.csv` em 6 min e 5 seg, com 14.8 GiB, somando 1 bilhão de linhas, com nome_da_estação `string` e temperatura `float` com precisão de duas casas decimais
 
 ```text
 <nome_da_estação>;<temperatura>
 ```
-- nome_da_estação: string
-- temperatura: float com precisão de duas casas decimais
 
 Exemplo:
 
@@ -127,13 +116,13 @@ Cape Town;19.01
 
 Durante o desenvolvimento deste projeto, diversas boas práticas de engenharia de dados foram aplicadas, aliando performance, clareza e adaptabilidade. Desde a geração de dados até as estratégias de leitura e processamento, cada etapa foi pensada para refletir desafios reais enfrentados por engenheiros de dados em ambientes com recursos limitados.
 
-A geração do arquivo de 1 bilhão de linhas evitou o uso do round() tradicional, optando por interpolação de strings (f"{x:.1f}") para controlar casas decimais com melhor desempenho.
-A distribuição dos nomes das estações meteorológicas foi feita com random.choices() para simular uniformidade geográfica realista, a escrita dos dados foi realizada em blocos (batch write), reduzindo drasticamente o tempo de I/O, uma otimização essencial quando se trabalha com arquivos massivos.
+A geração do arquivo de 1 bilhão de linhas evitou o uso do `round()` tradicional, optando por interpolação de strings `(f"{x:.1f}")` para controlar casas decimais com melhor desempenho, ainda, distribuição dos nomes das estações meteorológicas foi feita com `random.choices()` para simular uniformidade geográfica realista, a escrita dos dados foi realizada em blocos (batch write), reduzindo drasticamente o tempo de I/O, uma otimização essencial quando se trabalha com arquivos massivos.
 
 Antes mesmo da geração dos dados, o script realiza uma estimativa precisa do tamanho esperado em disco, auxiliando no planejamento de infraestrutura. Ao longo da execução, mensagens informativas e uma barra de progresso mantêm o usuário bem informado, com validações robustas e opções de ajuda acessíveis por linha de comando.
 
 Na etapa de processamento, diferentes abordagens foram implementadas para comparar desempenho, escalabilidade e consumo de memória, desde leitura linha a linha com agregações em tempo real em dicionários (ideal para máquinas com pouca RAM), até chunking manual e com Pandas, permitindo maior controle e performance em pipelines iterativos.
-Também foi incluído o uso do DuckDB, uma engine colunar embutida que executa consultas SQL diretamente sobre arquivos .csv e .parquet, entregando performance próxima de sistemas distribuídos, mas sem a complexidade de um cluster.
+
+Também foi incluído o uso do DuckDB, uma engine colunar embutida que executa consultas SQL diretamente sobre arquivos `.csv` e `.parquet`, entregando performance próxima de sistemas distribuídos, mas sem a complexidade de um cluster.
 
 Essa combinação de técnicas oferece um estudo de caso valioso para quem busca aprender ou ensinar práticas reais de engenharia de dados com foco em desempenho, boas escolhas arquiteturais e domínio técnico sobre o stack Python moderno.
 
@@ -159,7 +148,7 @@ Neste projeto, vamos utilizar o Python 3.11.4
 
 ### INSTALAÇÃO E CONFIGURAÇÃO
 
-A - Execute o comando, passando os argumentos da quantidade de linhas que quer gerar:
+A - No diretório raiz, execute o comando, passando os argumentos da quantidade de linhas que quer gerar:
 
 ```python
 python create_measurements.py 1_000_000_000
@@ -172,9 +161,9 @@ wc -l ../data/weather_stations.csv
 head -n 5 ../data/weather_stations.csv
 ```
 
-C - Entre no diretório `/data/`e execute o comando, de acordo com a ferramenta e amodelagem de dados desejada:
+C - Acesse o diretório `src` e execute os comandos abaixo, de acordo com a ferramenta e amodelagem de dados desejada:
 
-1) Python - processamento BRUTO com `defaultdict`, utilizando Python vanilla!
+1) Python - processamento BRUTO, utilizando `defaultdict`, Python vanilla!
 ```python
 python etl_python.py
 ```
@@ -184,31 +173,59 @@ python etl_python.py
 python etl_python_chuncking.py
 ```
 
-3) Pandas
+3) Instale a biblioteca Pyarrow, utilizando o Poetry, com o comando:
+```python
+poetry add pyarrow
+```
+
+4) Python com Pyarrow
+```python
+python etl_python_pyarrow.py
+```
+
+5) Instale a biblioteca Pandas, utilizando o Poetry, com o comando:
+```python
+poetry add pandas
+```
+
+6) Pandas
 ```python
 python etl_pandas.py
 ```
 
-4) Pandas com chuncking
+7) Pandas com chuncking
 ```python
 python etl_pandas_chuncking.py
 ```
 
-5) Instale a biblioteca DuckDB, utilizando o Poetry, com o comando:
+8) Instale a biblioteca Polars, utilizando o Poetry, com o comando:
+```python
+poetry add polars
+```
+
+9) Polars
+```python
+python etl_polars.py
+```
+
+10)  Instale a biblioteca DuckDB, utilizando o Poetry, com o comando:
 ```python
 poetry add duckdb
 ```
 
-6) DuckDB
+11)  DuckDB
 ```python
 python etl_duckdb.py
 ```
+### LOGGING
+
+Todos os processamentos estão sendo gravados no diretório `logs`com seu respectivo nome do arquivo.
 
 ---
 
 ## OUTPUT EXAMPLES
 
-Todos os resultados finais são exportados nos formatos .csv e .parquet
+Todos os resultados finais são exportados nos formatos `.csv` e `.parquet` .
 
 Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apache Superset ou puro Python, inclusive, o arquivo de saída será ordenado alfabeticamente por nome da estação:
 
@@ -255,6 +272,7 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 ### DuckDB 🥇 🏆
 🟢 Utilização do banco de dados DuckDB, a ETL rodou lisa, demorando 12.38 segundos e consumindo apenas 1.76 GiB de memória RAM, no momento de pico de utilização do sistema.
 
+Durante o desenvolvimento do desafio, foi instalado recurso Early Out-Of-Memory killer, que monitora a memória do sistema e mata processos automaticamente antes que o sistema fique totalmente sem memória (e congele), previnindo travamentos causados por falta de RAM, especialmente útil em sistemas com pouca memória, como homelabs.
 
 ## CONCLUSION
 
@@ -270,8 +288,6 @@ O benchmark conduzido com 1 bilhão de registros sintéticos de estações meteo
 
 ![total_time](image.png)
 
-DuckDB novamente se destaca por sua eficiência vetorizada e engine SQL em memória. Chunking com Pandas ou Python é mais lento, mas confiável quando há limitação de RAM.
-
 ---
 
 ### 2. Pico de Uso de Memória RAM
@@ -285,13 +301,11 @@ DuckDB novamente se destaca por sua eficiência vetorizada e engine SQL em memó
 
 ![total_memory](image-1.png)
 
-DuckDB e PyArrow mantêm uso controlado de memória. Abordagens com chunking consomem mais, mas são seguras. Estratégias sem chunking falham com volumes bilionários.
-
 ---
 
 ### 3. Tamanho dos Arquivos (MiB)
 
-Todos os arquivos CSV têm tamanho semelhante (~252 KB), o DuckDB gerou o menor .csv e também o .parquet mais compacto, evidenciando compressão eficiente e escrita otimizada.
+Todos os arquivos CSV têm tamanho semelhante (~252 KB), o DuckDB gerou o menor `.csv` e também o `.parquet` mais compacto, evidenciando compressão eficiente e escrita otimizada.
 
 ![total_file_size](image-2.png)
 
@@ -302,7 +316,7 @@ Todos os arquivos CSV têm tamanho semelhante (~252 KB), o DuckDB gerou o menor 
 - DuckDB permanece como a opção mais rápida, leve e escalável para análise local, com excelente performance mesmo com 1 bilhão de registros.
 - Pandas + chunking se mostra um bom compromisso para ambientes com restrição de memória, sem comprometer robustez.
 - Python puro com chunking é funcional, mas requer ajustes e monitoramento rigoroso de recursos.
-- Polars ainda não sustentou o volume testado — falhou em todas as tentativas mesmo com paralelismo ativado.
+- Polars ainda não sustentou o volume testado, falhou em todas as tentativas mesmo com paralelismo ativado.
 
 ### Recomendações Finais
 
@@ -317,11 +331,11 @@ Para pipelines de grande volume com baixa complexidade de transformação e foco
 
 ---
 
-## 📋 Funcionalidades do Dashboard
+## Funcionalidades do Dashboard
 
-Este dashboard interativo em Streamlit exibe e explora estatísticas climáticas agregadas por estação meteorológica. As principais funcionalidades incluem:
+Dashboard interativo em Streamlit exibe e explora estatísticas climáticas agregadas por estação meteorológica e as principais funcionalidades incluem:
 
-### 🔍 Leitura e Visualização de Dados
+### Leitura e Visualização de Dados
 
 - Leitura otimizada de arquivo `.csv` com separador `;`.
 - Verificação automática da existência do arquivo de dados.
@@ -329,20 +343,30 @@ Este dashboard interativo em Streamlit exibe e explora estatísticas climáticas
 - Feedback visual de sucesso ou erro no carregamento dos dados.
 
 
-### 📊 Visualizações Gráficas Interativas
+### Visualizações Gráficas Interativas
 
-1.  Temperatura Média por Estação
-    - Gráfico de barras com valores médios por estação.
-2.  Temperatura Mínima por Estação
-    - Gráfico de barras colorido com escala azul para destacar variações de mínimas.
-3.  Temperatura Máxima por Estação
-    - Gráfico de barras com coloração em tons de vermelho para destacar extremos.
-4.  Dispersão: Mínima vs Máxima
-    - Gráfico de dispersão (scatter plot) com cada ponto representando uma estação.
+1.  Temperatura Média por Estação, com gráfico de barras com valores médios por estação.
+2.  Temperatura Mínima por Estação, por meio de gráfico de barras colorido com escala azul para destacar variações de mínimas.
+3.  Temperatura Máxima por Estação, utilizando gráfico de barras com coloração em tons de vermelho para destacar extremos.
+4.  E dispersão de Mínima vs Máxima, com gráfico de dispersão (scatter plot) com cada ponto representando uma estação.
     - Eixo X: Temperatura mínima
     - Eixo Y: Temperatura máxima
     - Tamanho dos pontos baseado na temperatura média (normalizada)
 
+### Como rodar o dashboard
+
+O repositório contempla o arquivo `src/create_station_metrics_mart.py` que gera um arquivo intermediário `data/station_metrics_mart.csv` , transformado e preparado para consumo do dashboard que pode ser executado, por meio dos comandos:
+
+1) Instale a biblioteca Streamlit, utilizando o Poetry, com o comando:
+```python
+poetry add streamlit
+```
+
+2) no diretório `dashboard`, execute o Streamlit:
+```python
+poetry run streamlit run dashboard/app_duckdb_csv_table.py
+```
+3) Acesse a url fornecida pela aplicação.
 
 ---
 
@@ -445,7 +469,7 @@ DuckDB é extremamente eficaz para gerar datasets analíticos e alimentadores de
 
 ✅ Processamento de 1 bilhão de registros (~14GB) com múltiplas abordagens: Python puro, Pandas, chunking manual, PyArrow, Polars e DuckDB.
 
-✅ Benchmark completo avaliando tempo de execução, uso de memória e tamanho de arquivos de saída (.csv e .parquet).
+✅ Benchmark completo avaliando tempo de execução, uso de memória e tamanho de arquivos de saída (`.csv` e `.parquet`).
 
 ✅ Geração realista de dados sintéticos, com distribuição uniforme entre estações meteorológicas e variação controlada de temperatura.
 
