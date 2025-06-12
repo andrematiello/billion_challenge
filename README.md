@@ -1,8 +1,55 @@
 # ONE BILLION ROWS CHALLENGE - PYTHON EDITION🐍
 
-## ABOUT THE PROJECT
+## 📚 SUMÁRIO
 
-✨ Uma jornada prática de engenharia de dados para processar 1 bilhão de registros, extraindo estatísticas agregadas de temperatura com performance, escalabilidade em Python, utilizando o projeto One Billion Row Challenge, desenvolvido como um exercício avançado de engenharia de dados aplicada, com o objetivo de demonstrar como processar com eficiência um arquivo massivo de 1 bilhão de linhas (~14GB) usando Python, cujo foco está em realizar operações computacionalmente simples, como agregações (mínimo, média e máximo) e ordenação com uso de recursos computacionais, de forma escalável.
+- [ONE BILLION ROWS CHALLENGE - PYTHON EDITION🐍](#one-billion-rows-challenge---python-edition)
+  - [📚 SUMÁRIO](#-sumário)
+  - [SOBRE O PROJETO](#sobre-o-projeto)
+  - [INSPIRAÇÃO](#inspiração)
+  - [PROBLEMA DE NEGÓCIO](#problema-de-negócio)
+  - [DESAFIO PROPOSTO](#desafio-proposto)
+    - [OPERAÇÃO GERAL](#operação-geral)
+    - [ARQUIVO DE SAÍDA](#arquivo-de-saída)
+    - [PONTOS TÉCNICOS INTERESSANTES](#pontos-técnicos-interessantes)
+  - [COMO EXECUTAR](#como-executar)
+    - [REQUISITOS](#requisitos)
+    - [INSTALAÇÃO E CONFIGURAÇÃO](#instalação-e-configuração)
+    - [LOGGING](#logging)
+  - [EXEMPLOS DE SAÍDA](#exemplos-de-saída)
+  - [BENCHMARKING E RESULTADOS DE PERFORMANCE ✨](#benchmarking-e-resultados-de-performance-)
+    - [PYTHON](#python)
+    - [PYTHON + PYARROW](#python--pyarrow)
+    - [PYTHON + PANDAS](#python--pandas)
+    - [PYTHON + POLARS](#python--polars)
+    - [DuckDB 🥇 🏆](#duckdb--)
+  - [CONCLUSÃO](#conclusão)
+    - [1. Tempo de Execução Total](#1-tempo-de-execução-total)
+    - [2. Pico de Uso de Memória RAM](#2-pico-de-uso-de-memória-ram)
+    - [3. Tamanho dos Arquivos (MiB)](#3-tamanho-dos-arquivos-mib)
+    - [Considerações de Arquitetura e Escalabilidade](#considerações-de-arquitetura-e-escalabilidade)
+    - [Recomendações Finais](#recomendações-finais)
+  - [FUNCIONALIDADES DO DASHBOARD](#funcionalidades-do-dashboard)
+    - [LEITURA E VISUALIZAÇÃO DOS DADOS](#leitura-e-visualização-dos-dados)
+    - [VISUALIZAÇÕES GRÁFICAS INTERATIVAS](#visualizações-gráficas-interativas)
+    - [COMO RODAR O DASHBOARD](#como-rodar-o-dashboard)
+  - [✨ 🦆 O DUCKDB EXPLICADO](#--o-duckdb-explicado)
+      - [1. ARQUITETURA EMBUTIDA, NÃO É CLIENTE-SERVIDOR](#1-arquitetura-embutida-não-é-cliente-servidor)
+      - [2. NÃO SUPORTA MÚLTIPLAS CONSULTAS SIMULTÂNEAS](#2-não-suporta-múltiplas-consultas-simultâneas)
+      - [3. NÃO TOLERA FALHAS, POR PADRÃO](#3-não-tolera-falhas-por-padrão)
+      - [4. NÃO ESCALE HORIZONTALMENTE](#4-não-escale-horizontalmente)
+      - [5. FOCO PRINCIPAL É ANÁLISE LOCAL - OLAP, NÃO OLTP](#5-foco-principal-é-análise-local---olap-não-oltp)
+    - [UTILIZE DUCKDB COM SEGURANÇA PARA:](#utilize-duckdb-com-segurança-para)
+    - [RECOMENDAÇÕES PRÁTICAS](#recomendações-práticas)
+  - [FUNCIONALIDADES TÉCNICAS PRINCIPAIS](#funcionalidades-técnicas-principais)
+    - [STACK DO PROJETO](#stack-do-projeto)
+    - [TECNOLOGIAS UTILIZADAS](#tecnologias-utilizadas)
+  - [DÚVIDAS, SUGESTÕES OU FEEDBACK](#dúvidas-sugestões-ou-feedback)
+  - [LICENÇA](#licença)
+
+
+## SOBRE O PROJETO
+
+✨ Este projeto é uma jornada prática de engenharia de dados, que processa 1 bilhão de registros extraindo estatísticas agregadas de temperaturas com performance, escalabilidade em Python, utilizando o projeto One Billion Row Challenge, desenvolvido como um exercício avançado de engenharia de dados aplicada, com o objetivo de demonstrar como processar com eficiência um arquivo massivo de 1 bilhão de linhas (~14GB) usando Python, cujo foco está em realizar operações computacionalmente simples, como agregações (mínimo, média e máximo) e ordenação com uso de recursos computacionais, de forma escalável.
 
 Como complemento visual e analítico, o projeto inclui um dashboard interativo desenvolvido em Streamlit, com caráter de portfolio, sem utilização prática, que consome os dados processados e permite ao usuário explorar visualmente as estatísticas por estação meteorológica, cujo painel apresenta uma tabela dinâmica com os dados agregados, gráficos de barras para temperatura média, mínima e máxima, além de um gráfico de dispersão cruzando extremos térmicos, tudo isso com visualização responsiva e performance local, sem necessidade de infraestrutura em nuvem.
 
@@ -10,13 +57,13 @@ Este projeto é particularmente útil como estudo de caso para engenheiros de da
 
 Todo o desafio foi executado em um ambiente local (homelab), utilizando um Dell Optiplex 7020, com sistema operacional Ubuntu Server, processador Intel Core i5-14500T e 16 GiB de memória RAM.
 
-## INSPIRATION
+## INSPIRAÇÃO
 
 O desafio foi inspirado no projeto original [1BRC](https://github.com/gunnarmorling/1brc), proposto por Gunnar Morling, em Java, posteriormente, a iniciativa foi adaptada para Python por Luciano Vasconcelos, no repositório [One-Billion-Row-Challenge-Python](https://github.com/lvgalvao/One-Billion-Row-Challenge-Python), como um workshop, dentro do contexto educacional da Jornada de Dados, em 2024.
 
 ---
 
-## BUSINESS PROBLEM
+## PROBLEMA DE NEGÓCIO
 
 A seguir, destacam-se os principais problemas que esse case ajuda a resolver:
 
@@ -50,7 +97,7 @@ Além do processamento eficiente, o projeto oferece um dashboard interativo cons
 
 ---
 
-## PROPOSED CHALLENGE
+## DESAFIO PROPOSTO
 
 O desafio proposto neste projeto consiste em desenvolver uma solução robusta, eficiente e escalável em Python capaz de processar 1 bilhão de registros de temperatura, simulando um ambiente real de engenharia de dados com alta volumetria. O foco está na extração de estatísticas agregadas por estação meteorológica, com ênfase em performance, uso consciente de recursos computacionais e entrega analítica final em múltiplos formatos, com os seguintes objetivos técnicos:
 
@@ -68,7 +115,7 @@ Essas comparações cobrem soluções desde Python puro até DuckDB, passando po
 
 ---
 
-### GENERAL OPERATION
+### OPERAÇÃO GERAL
 
 A geração do dataset sintético com 1 bilhão de linhas foi cuidadosamente projetada para simular condições realistas de ingestão massiva de dados sensoriais, adotando estratégias eficientes de escrita e controle de performance. Abaixo, o fluxo operacional detalhado:
 
@@ -95,7 +142,7 @@ Ao final da execução, o script exibe o tempo total decorrido e o tamanho real 
 
 ---
 
-### OUTPUT FILE
+### ARQUIVO DE SAÍDA
 
 Arquivo gerado `data/weather_stations.csv` em 6 min e 5 seg, com 14.8 GiB, somando 1 bilhão de linhas, com nome_da_estação `string` e temperatura `float` com precisão de duas casas decimais
 
@@ -112,7 +159,7 @@ Cape Town;19.01
 ```
 ---
 
-### INTERESTING TECHNICAL POINTS
+### PONTOS TÉCNICOS INTERESSANTES
 
 Durante o desenvolvimento deste projeto, diversas boas práticas de engenharia de dados foram aplicadas, aliando performance, clareza e adaptabilidade. Desde a geração de dados até as estratégias de leitura e processamento, cada etapa foi pensada para refletir desafios reais enfrentados por engenheiros de dados em ambientes com recursos limitados.
 
@@ -128,9 +175,9 @@ Essa combinação de técnicas oferece um estudo de caso valioso para quem busca
 
 ---
 
-## HOW TO RUN
+## COMO EXECUTAR
 
-### REQUIREMENTS
+### REQUISITOS
 
 1. Git e Github: Utilizado para versionamento do código e para repositório remoto do projeto.
 Você deve ter o Git instalado em sua máquina e também deve ter uma conta no GitHub.
@@ -161,16 +208,16 @@ wc -l ../data/weather_stations.csv
 head -n 5 ../data/weather_stations.csv
 ```
 
-C - Acesse o diretório `src` e execute os comandos abaixo, de acordo com a ferramenta e amodelagem de dados desejada:
+C - Acesse o diretório `src` e execute os comandos abaixo, de acordo com a ferramenta e modelagem de dados desejada:
 
 1) Python - processamento BRUTO, utilizando `defaultdict`, Python vanilla!
 ```python
 python etl_python.py
 ```
 
-2) Python com chuncking
+2) Python com chunking
 ```python
-python etl_python_chuncking.py
+python etl_python_chunking.py
 ```
 
 3) Instale a biblioteca Pyarrow, utilizando o Poetry, com o comando:
@@ -193,9 +240,9 @@ poetry add pandas
 python etl_pandas.py
 ```
 
-7) Pandas com chuncking
+7) Pandas com chunking
 ```python
-python etl_pandas_chuncking.py
+python etl_pandas_chunking.py
 ```
 
 8) Instale a biblioteca Polars, utilizando o Poetry, com o comando:
@@ -217,13 +264,14 @@ poetry add duckdb
 ```python
 python etl_duckdb.py
 ```
+
 ### LOGGING
 
 Todos os processamentos estão sendo gravados no diretório `logs` com seu respectivo nome do arquivo.
 
 ---
 
-## OUTPUT EXAMPLES
+## EXEMPLOS DE SAÍDA
 
 Todos os resultados finais são exportados nos formatos `.csv` e `.parquet` .
 
@@ -239,14 +287,14 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 
 ---
 
-## BENCHMARKING AND PERFORMANCE RESULTS ✨
+## BENCHMARKING E RESULTADOS DE PERFORMANCE ✨
 
 ### PYTHON
 🔴 Python vanilla, sem utilização de ulimit ou cgroups, a ETL quebrou por 6 vezes, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp.
 
 🟨 Python Vanilla com melhorias de performance, a ETL rodou satisfatoriamente, demorando 726.20 segundos (pouco mais de 12 minutos) e consumindo apenas 1.5 GiB de memória RAM, no momento de pico de utilização do sistema.
 
-🟨 Python com a utilização de técnica de chunking, a ETL rodou sofrida, não aguentou com chuncking de 100 milhões de linhas, quebrando duas vezes, rodando com chuncking de 50 milhões de linhas em 20 etapas, demorando 1436.41 segundos (quase 24 minutos) e consumindo 12.2 GiB de memória RAM, no momento de pico de utilização do sistema.
+🟨 Python com a utilização de técnica de chunking, a ETL rodou sofrida, não aguentou com chunking de 100 milhões de linhas, quebrando duas vezes, rodando com chunking de 50 milhões de linhas em 20 etapas, demorando 1436.41 segundos (quase 24 minutos) e consumindo 12.2 GiB de memória RAM, no momento de pico de utilização do sistema.
 
 ---
 
@@ -258,7 +306,7 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 ### PYTHON + PANDAS
 🔴 Python + Pandas na leitura e no processamento, a ETL quebrou por 3 vezes, consumindo os 16 GiB (15.3) de memória RAM do servidor e mais 4 de Swp.
 
-🟨 Python + Pandas na leitura e no processamento + utilização de técnica de chunking, a ETL rodou satisfatoriamente, rodou com chuncking de 100 milhões de linhas, demorando 348.58 segundos (quase 6 minutos) e consumindo 10 GiB de memória RAM, no momento de pico de utilização do sistema.
+🟨 Python + Pandas na leitura e no processamento + utilização de técnica de chunking, a ETL rodou satisfatoriamente, rodou com chunking de 100 milhões de linhas, demorando 348.58 segundos (quase 6 minutos) e consumindo 10 GiB de memória RAM, no momento de pico de utilização do sistema.
 
 ---
 
@@ -274,7 +322,7 @@ Isso permite análises posteriores em ferramentas como Power BI, Metabase, Apach
 
 Durante o desenvolvimento do desafio, foi instalado recurso Early Out-Of-Memory killer, que monitora a memória do sistema e mata processos automaticamente antes que o sistema fique totalmente sem memória (e congele), previnindo travamentos causados por falta de RAM, especialmente útil em sistemas com pouca memória, como homelabs.
 
-## CONCLUSION
+## CONCLUSÃO
 
 O benchmark conduzido com 1 bilhão de registros sintéticos de estações meteorológicas revela insights importantes sobre tempo de execução, uso de memória, tamanho dos arquivos e escalabilidade entre diferentes estratégias de processamento: Python puro, Pandas, abordagens com chunking, Polars e DuckDB.
 
@@ -331,19 +379,18 @@ Para pipelines de grande volume com baixa complexidade de transformação e foco
 
 ---
 
-## Funcionalidades do Dashboard
+## FUNCIONALIDADES DO DASHBOARD
 
 Dashboard interativo em Streamlit exibe e explora estatísticas climáticas agregadas por estação meteorológica e as principais funcionalidades incluem:
 
-### Leitura e Visualização de Dados
+### LEITURA E VISUALIZAÇÃO DOS DADOS
 
 - Leitura otimizada de arquivo `.csv` com separador `;`.
 - Verificação automática da existência do arquivo de dados.
 - Exibição interativa da tabela completa com estatísticas por estação.
 - Feedback visual de sucesso ou erro no carregamento dos dados.
 
-
-### Visualizações Gráficas Interativas
+### VISUALIZAÇÕES GRÁFICAS INTERATIVAS
 
 1.  Temperatura Média por Estação, com gráfico de barras com valores médios por estação.
 2.  Temperatura Mínima por Estação, por meio de gráfico de barras colorido com escala azul para destacar variações de mínimas.
@@ -353,7 +400,7 @@ Dashboard interativo em Streamlit exibe e explora estatísticas climáticas agre
     - Eixo Y: Temperatura máxima
     - Tamanho dos pontos baseado na temperatura média (normalizada)
 
-### Como rodar o dashboard
+### COMO RODAR O DASHBOARD
 
 O repositório contempla o arquivo `src/create_station_metrics_mart.py` que gera um arquivo intermediário `data/station_metrics_mart.csv` , transformado e preparado para consumo do dashboard que pode ser executado, por meio dos comandos:
 
@@ -370,12 +417,9 @@ poetry run streamlit run dashboard/app_duckdb_csv_table.py
 
 ---
 
-## ✨ 🦆 O DuckDB é tão excepcional que merece uma explicação um pouco mais detalhada
+## ✨ 🦆 O DUCKDB EXPLICADO
 
-
-### DuckDB: rápido, leve e pronto para escalar localmente
-
-DuckDB é uma excelente fonte para dashboards, se usado da maneira certa, o motor mais equilibrado para análises locais e pipelines de pequeno e médio porte, por que funciona tão bem?
+DuckDB é uma excelente fonte para dashboards, rápido, leve e pronto para escalar localmente, se usado da maneira certa, o motor mais equilibrado para análises locais e pipelines de pequeno e médio porte, por que funciona tão bem?
 
 - Ele processa os dados direto do disco, sem precisar carregá-los inteiramente na memória.
 - Seu modelo de execução é colunar e vetorizado, o que significa que cada operação trabalha por blocos otimizados, aproveitando o cache do processador.
@@ -391,21 +435,17 @@ DuckDB é uma excelente fonte para dashboards, se usado da maneira certa, o moto
 - Integração com Parquet e CSV:
 - DuckDB pode ser usado para consultar diretamente arquivos Parquet/CSV como se fossem tabelas, útil quando seu dashboard é alimentado por arquivos externos.
 
-✅ Ideal para protótipos rápidos e ETLs locais com performance real, ambientes com pouca RAM ou CPU.
-
 ---
 
 ############################### MAS CUIDADO ⛔ ###############################
 
 ---
 
-O DuckDB é uma ferramenta poderosa, mas como toda tecnologia, tem um conjunto de casos para os quais é ideal e outros onde não é a melhor escolha, conforme segue:
-
-### ⚠️ DuckDB é excelente para prototipagem, análise local, cargas moderadas e dados tabulares em formato Parquet, CSV, Arrow, mas por que DuckDB não é geralmente indicado para produção?
+O DuckDB é uma ferramenta poderosa, mas como toda tecnologia, tem um conjunto de casos para os quais é ideal e outros onde não é a melhor escolha, é excelente para prototipagem, análise local, cargas moderadas e dados tabulares em formato Parquet, CSV, Arrow, mas por que DuckDB não é geralmente indicado para produção?
 
 Nem todo projeto de dados exige alta performance ou infraestrutura distribuída, mas saber escolher a abordagem certa para o contexto certo é o que separa scripts rápidos de pipelines confiáveis e sustentáveis, seus testes mostraram que cada tecnologia se comporta de forma distinta frente a três fatores críticos: volume de dados, disponibilidade de memória RAM e necessidade de escalabilidade.
 
-#### 1. Arquitetura embutida, não cliente-servidor
+#### 1. ARQUITETURA EMBUTIDA, NÃO É CLIENTE-SERVIDOR
 
 - DuckDB roda embutido no processo da aplicação (embedded database), isso quer dizer que não há um servidor separado para lidar com concorrência, autenticação, escalabilidade, etc., em produção, espera-se que o banco aceite múltiplas conexões, distribua carga e possa ser escalado horizontalmente.
 
@@ -413,7 +453,7 @@ Nem todo projeto de dados exige alta performance ou infraestrutura distribuída,
 
 ---
 
-#### 2. Não suporta múltiplas sessões concorrentes de escrita
+#### 2. NÃO SUPORTA MÚLTIPLAS CONSULTAS SIMULTÂNEAS
 
 - Em bancos como PostgreSQL, múltiplos processos podem ler e escrever simultaneamente, com controle de transações.
 - O DuckDB só permite uma escrita por vez e ainda bloqueia arquivos `.DuckDB` durante a operação.
@@ -422,7 +462,7 @@ Nem todo projeto de dados exige alta performance ou infraestrutura distribuída,
 
 ---
 
-#### 3. Não é tolerante a falhas por padrão
+#### 3. NÃO TOLERA FALHAS, POR PADRÃO
 
 - Bancos de produção geralmente contam com replicação, backups automáticos, failover, logs de transação para recovery e DuckDB não implementa esses recursos nativamente.
 
@@ -430,7 +470,7 @@ Nem todo projeto de dados exige alta performance ou infraestrutura distribuída,
 
 ---
 
-#### 4. Não escala horizontalmente
+#### 4. NÃO ESCALE HORIZONTALMENTE
 
 - DuckDB não possui arquitetura distribuída, ele não foi feito para escalar em múltiplas máquinas nem processar grandes volumes em cluster (como Spark, Dask, BigQuery, etc).
 
@@ -438,7 +478,7 @@ Nem todo projeto de dados exige alta performance ou infraestrutura distribuída,
 
 ---
 
-#### 5. Foco principal é análise local — OLAP, não OLTP
+#### 5. FOCO PRINCIPAL É ANÁLISE LOCAL - OLAP, NÃO OLTP
 
 - DuckDB é orientado a consultas analíticas complexas (OLAP), não a sistemas transacionais (OLTP), ele brilha ao fazer `SELECT station, AVG(temp)` em 100 milhões de linha, mas não serve bem para registrar pedidos de e-commerce ou gerenciar usuários de um app em tempo real.
 
@@ -446,7 +486,7 @@ Nem todo projeto de dados exige alta performance ou infraestrutura distribuída,
 
 ---
 
-### Use DuckDB com confiança para:
+### UTILIZE DUCKDB COM SEGURANÇA PARA:
 
 ![duckDB_cases](assets/image-3.png)
 
@@ -454,7 +494,8 @@ Quando se trata de uso do DuckDB como fonte de dados para dashboards, como Power
 
 ---
 
-### Recomendações práticas
+### RECOMENDAÇÕES PRÁTICAS
+
 ![DuckDB](assets/image-4.png)
 
 DuckDB é extremamente eficaz para gerar datasets analíticos e alimentadores de dashboard, mas não é ideal como fonte de dados dinâmica e concorrente.
@@ -465,7 +506,7 @@ DuckDB é extremamente eficaz para gerar datasets analíticos e alimentadores de
 
 ---
 
-## MAIN TECHNICAL FEATURES
+## FUNCIONALIDADES TÉCNICAS PRINCIPAIS
 
 ✅ Processamento de 1 bilhão de registros (~14GB) com múltiplas abordagens: Python puro, Pandas, chunking manual, PyArrow, Polars e DuckDB.
 
@@ -489,14 +530,12 @@ DuckDB é extremamente eficaz para gerar datasets analíticos e alimentadores de
 
 ---
 
-## TECHNOLOGIES USED
-
-### 🛠️ Project Stack Challenge Overview
+### STACK DO PROJETO
 
 ![recomendations](assets/image-5.png)
 
 
-### Tecnologias Utilizadas no Dashboard
+### TECNOLOGIAS UTILIZADAS
 
 - Streamlit: Framework web para dashboards em Python.
 - Plotly Express: Gráficos interativos com visual moderno.
@@ -504,14 +543,14 @@ DuckDB é extremamente eficaz para gerar datasets analíticos e alimentadores de
 - Pathlib: Manipulação segura de caminhos de arquivos.
 ---
 
-## QUESTIONS, SUGGESTIONS OR FEEDBACK
+## DÚVIDAS, SUGESTÕES OU FEEDBACK
 
 🚀 André Matiello C. Caramanti - [matiello.andre@hotmail.com](mailto:matiello.andre@hotmail.com)
 
-Project carried out with the support of Artificial Intelligence (ChatGPT)
+Projeto realizado com o apoio de Inteligência Artificial (ChatGPT)
 
 ---
 
-## LICENSE
+## LICENÇA
 
 [MIT License](https://andrematiello.notion.site/mit-license)
