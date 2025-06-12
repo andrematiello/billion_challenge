@@ -7,11 +7,6 @@
     <img src="assets/us.png" width="18" alt="English version" title="English version"> English
   </a>
 </p>
-
-<a href="https://www.flaticon.com/free-icons/etl" title="ETL icons">
-  <img align="left" alt="Ícone ETL" height="45" width="45" src="./assets/etl.png">
-</a>
-
 <br>
 
 > Projeto de Engenharia de Dados com foco em **ETL local, benchmarking, visualização interativa e uso estratégico do DuckDB**, idealizado como estudo de caso realista para portfólio profissional.
