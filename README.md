@@ -448,7 +448,7 @@ Nem todo projeto de dados exige alta performance ou infraestrutura distribuída,
 
 ### Use DuckDB com confiança para:
 
-![alt text](assets/image-3.png)
+![duckDB_cases](assets/image-3.png)
 
 Quando se trata de uso do DuckDB como fonte de dados para dashboards, como Power BI, Metabase, Superset ou até Streamlit, a análise muda bastante, e a resposta é "depende do uso, mas com ressalvas importantes".
 
@@ -493,7 +493,7 @@ DuckDB é extremamente eficaz para gerar datasets analíticos e alimentadores de
 
 ### 🛠️ Project Stack Challenge Overview
 
-![stack](image-5.png)
+![recomendations](assets/image-5.png)
 
 
 ### Tecnologias Utilizadas no Dashboard
